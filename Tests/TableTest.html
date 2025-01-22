@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Task Table</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-bottom: 20px;
+        }
+
+        th,
+        td {
+            border: 1px solid #ccc;
+            padding: 8px;
+            text-align: left;
+        }
+
+        th {
+            background-color: #f4f4f4;
+        }
+
+        input[type="text"] {
+            width: 100%;
+            box-sizing: border-box;
+        }
+
+        .section {
+            font-size: 1.2em;
+            font-weight: bold;
+            background-color: #e8e8e8;
+            cursor: pointer;
+            padding: 10px;
+        }
+
+        .hidden {
+            display: none;
+        }
+    </style>
+</head>
+
+<body>
+    <h1>Task Management Table</h1>
+
+    <div id="task-table"></div>
+
+    <script>
+        // JSON Data
+        const data = {
+            "Por Planear": [
+                {
+                    "id": "1578125",
+                    "creator": "Daniel Cunha",
+                    "userActual": "Jorge Paiva",
+                    "responsible": "Daniel Cunha",
+                    "priority": "3",
+                    "project": "0.1. - Product Backlog - GM WEB - Controladores",
+                    "title": "Envio de email",
+                    "taskType": "new func",
+                    "dateInserted": "2021-11-27",
+                    "taskState": "Por Planear"
+                },
+                // More tasks...
+            ],
+            "Curso": [
+                {
+                    "id": "1570288",
+                    "creator": "Thiago Vieira",
+                    "userActual": "Jorge Paiva",
+                    "responsible": "Jorge Paiva",
+                    "priority": "3",
+                    "project": "0.1. - Product Backlog - GM WEB - Controladores",
+                    "title": "Front-end do módulo Controladores (blazor)",
+                    "taskType": "new func",
+                    "dateInserted": "2020-01-17",
+                    "taskState": "Curso"
+                },
+                // More tasks...
+            ]
+        };
+
+        // Generate the table
+        const generateTable = (data) => {
+            const container = document.getElementById('task-table');
+            container.innerHTML = '';
+
+            Object.keys(data).forEach(section => {
+                // Section Header
+                const sectionHeader = document.createElement('div');
+                sectionHeader.textContent = section;
+                sectionHeader.className = 'section';
+                sectionHeader.addEventListener('click', () => {
+                    const table = sectionHeader.nextElementSibling;
+                    table.classList.toggle('hidden');
+                });
+                container.appendChild(sectionHeader);
+
+                // Table
+                const table = document.createElement('table');
+                table.classList.add('hidden');
+                const thead = document.createElement('thead');
+                const tbody = document.createElement('tbody');
+
+                // Columns
+                const columns = ["ID", "Creator", "User", "Responsible", "Priority", "Project", "Title", "Task Type", "Date Inserted", "State"];
+                const tr = document.createElement('tr');
+
+                columns.forEach(col => {
+                    const th = document.createElement('th');
+                    th.textContent = col;
+
+                    // Add filter input
+                    const input = document.createElement('input');
+                    input.type = 'text';
+                    input.placeholder = `Filter ${col}`;
+                    input.addEventListener('input', (e) => filterTable(e, tbody, columns.indexOf(col)));
+
+                    th.appendChild(input);
+                    tr.appendChild(th);
+                });
+
+                thead.appendChild(tr);
+                table.appendChild(thead);
+
+                // Rows
+                data[section].forEach(task => {
+                    const row = document.createElement('tr');
+                    row.dataset.id = task.id;
+
+                    columns.forEach(key => {
+                        const td = document.createElement('td');
+                        td.textContent = task[key.toLowerCase()] || task[key.replace(/ /g, "").toLowerCase()];
+                        row.appendChild(td);
+                    });
+
+                    tbody.appendChild(row);
+                });
+
+                table.appendChild(tbody);
+                container.appendChild(table);
+            });
+        };
+
+        // Filter functionality
+        const filterTable = (event, tbody, colIndex) => {
+            const filterValue = event.target.value.toLowerCase();
+            Array.from(tbody.rows).forEach(row => {
+                const cellValue = row.cells[colIndex]?.textContent.toLowerCase() || '';
+                row.style.display = cellValue.includes(filterValue) ? '' : 'none';
+            });
+        };
+
+        // Initialize the table
+        generateTable(data);
+    </script>
+</body>
+
+</html>

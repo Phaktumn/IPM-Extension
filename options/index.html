@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<style>
+		body {
+			max-width: 800px;
+			margin: 0 auto;
+		}
+		[lang] {
+			display: none;
+		}
+		:target {
+			background-color: pink;
+			border-radius: 0.25rem;
+		}
+		details {
+			background-color: lightcyan;
+		}
+		button:not([disabled]),
+		summary {
+			cursor: pointer;
+		}
+		[data-if-file-scheme-access-allowed] {
+			display: none;
+		}
+		body[data-file-scheme-access-allowed="true"] [data-if-file-scheme-access-allowed="true"],
+		body[data-file-scheme-access-allowed="false"] [data-if-file-scheme-access-allowed="false"] {
+			display: initial;
+		}
+	</style>
+</head>
+<body>
+	<h1>
+		<span lang="en">Settings</span>
+	</h1>
+	<div id="need-file-scheme-access">
+
+		<h2>
+			Table Header Color
+		</h2>
+		<p>
+			<input type="color" id="headerclr" value="#ff0000">
+		</p>
+
+		<h2>
+			<span lang="en">Enabling the feature</span>
+		</h2>
+		<p data-if-file-scheme-access-allowed="true">
+			<span lang="en">✔️ Setting changes have been completed.</span>
+		</p>
+		<p data-if-file-scheme-access-allowed="false">
+			<span lang="en">⚠️ Setting change may be required. Not required depending on the organization's group policy settings.</span>
+		</p>
+		<ol>
+			<li>
+				<span lang="en">Open <a data-id="extension-page-link">extensions page</a></span>
+			</li>
+			<li>
+				<span lang="en">Enable "Allow access to file URLs"</span>
+			</li>
+		</ol>
+		<h2>
+			<span lang="en">Confirm the operation</span>
+		</h2>
+		<button id="test">
+			<span lang="en">Open <code>file:///C:/</code></span>
+		</button>
+		<p>
+			Result: <span id="test-result">
+				<span lang="en">Unconfirmed</span>
+			</span>
+		</p>
+	</div>
+	<script src="./index.js"></script>
+</body>
+</html>

@@ -1,0 +1,121 @@
+<!doctype html>
+<!--
+ This page is shown when the extension button is clicked, because the
+ "browser_action" field in manifest.json contains the "default_popup" key with
+ value "popup.html".
+ -->
+<html>
+
+<head>
+    <title>Extension's Popup</title>
+    <style>
+        * {
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: "Segoe UI", "Lucida Grande", Tahoma, sans-serif;
+            font-size: 100%;
+        }
+
+        #status {
+            /* avoid an excessively wide status text */
+            white-space: pre;
+            text-overflow: ellipsis;
+            overflow: hidden;
+            max-width: 400px;
+        }
+
+        .column {
+            float: left;
+            width: 50%;
+            padding: 10px;
+        }
+
+        .row:after {
+            content: "";
+            display: table;
+            clear: both;
+        }
+    </style>
+
+    <!--
+      - JavaScript and HTML must be in separate files: see our Content Security
+      - Policy documentation[1] for details and explanation.
+      -
+      - [1]: https://developer.chrome.com/extensions/contentSecurityPolicy
+     -->
+    <script src="popup.js"></script>
+
+</head>
+
+<body style="width: 500px !important;">
+    <div class="row">
+        <div class="column" style="width: 250px;">
+
+            <h2>Tables</h2>
+            <b> Header Color </b>
+            <p>
+                <input type="color" id="headerclr" value="#ff0000">
+            </p>
+
+            <b> Footer Color </b>
+            <p>
+                <input type="color" id="footerclr" value="#ff0000">
+            </p>
+
+            <b> Border Color </b>
+            <p>
+                <input type="color" id="tborderclr" value="#ff0000">
+            </p>
+
+            <h2>Tabs</h2>
+            <b> Bottom Color Active </b>
+            <p>
+                <input type="color" id="tabBtmClr" value="#ff0000">
+            </p>
+
+            <b> Bottom Color Inactive </b>
+            <p>
+                <input type="color" id="tabInactiveBtmClr" value="#ff0000">
+            </p>
+
+        </div>
+
+        <div class="column" style="width: 250px;">
+            <h2>Date Picker</h2>
+            
+            <b> Today Background </b>
+            <p>
+                <input type="color" id="dpbgtoday" value="#ff0000">
+            </p>
+            <b> Hover Border </b>
+            <p>
+                <input type="color" id="dpborderhover" value="#ff0000">
+            </p>
+            <b> Hover Background </b>
+            <p>
+                <input type="color" id="dpbgthover" value="#ff0000">
+            </p>
+            <b> Selected Border </b>
+            <p>
+                <input type="color" id="dpselectedborder" value="#ff0000">
+            </p>
+            <b> Selected Background </b>
+            <p>
+                <input type="color" id="dpselectedbg" value="#ff0000">
+            </p>
+            <b> Text Hover </b>
+            <p>
+                <input type="color" id="dptexthover" value="#ff0000">
+            </p>
+            <b> Text Default </b>
+            <p>
+                <input type="color" id="dptextdefault" value="#ff0000">
+            </p>
+
+        </div>
+    </div>
+</body>
+
+</html>

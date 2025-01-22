@@ -1,0 +1,572 @@
+[
+    {
+        "id": "1578125",
+        "creator": "Daniel Cunha",
+        "userActual": "Jorge Paiva",
+        "responsible": "Daniel Cunha",
+        "priority": "3",
+        "project": "0.1. - Product Backlog - GM WEB - Controladores",
+        "title": "Envio de email",
+        "taskType": "new func",
+        "dateInserted": "2021-11-27 17:50:28.331",
+        "dateScheduledStart": null,
+        "dateScheduledEnd": null,
+        "dateStart": null,
+        "dateEnd": null,
+        "taskState": {
+            "code": "00",
+            "description": "Por Planear"
+        }
+    },
+    {
+        "id": "1578308",
+        "creator": "Miguel Gonçalves",
+        "userActual": "Jorge Paiva",
+        "responsible": "Jorge Paiva",
+        "priority": "3",
+        "project": "Browning - Alterações não Orçamentadas",
+        "title": "Alterações Trabalho Suplementar",
+        "taskType": "Tech Improv",
+        "dateInserted": "2021-12-07 18:21:19.483",
+        "dateScheduledStart": null,
+        "dateScheduledEnd": null,
+        "dateStart": null,
+        "dateEnd": null,
+        "taskState": {
+            "code": "00",
+            "description": "Por Planear"
+        }
+    },
+    {
+        "id": "1586255",
+        "creator": "Pedro Santos",
+        "userActual": "Jorge Paiva",
+        "responsible": "Pedro Santos",
+        "priority": "3",
+        "project": "Browning - Assistência Software",
+        "title": "Order Management",
+        "taskType": "BUG",
+        "dateInserted": "2023-07-21 16:47:59.996",
+        "dateScheduledStart": null,
+        "dateScheduledEnd": null,
+        "dateStart": null,
+        "dateEnd": null,
+        "taskState": {
+            "code": "00",
+            "description": "Por Planear"
+        }
+    },
+    {
+        "id": "1591452",
+        "creator": "Jorge Paiva",
+        "userActual": "Jorge Paiva",
+        "responsible": "Jorge Paiva",
+        "priority": "3",
+        "project": "Leicil - Controladores",
+        "title": "Configurações",
+        "taskType": "Assistência",
+        "dateInserted": "2024-09-24 00:00:00.0",
+        "dateScheduledStart": null,
+        "dateScheduledEnd": null,
+        "dateStart": null,
+        "dateEnd": null,
+        "taskState": {
+            "code": "00",
+            "description": "Por Planear"
+        }
+    },
+    {
+        "id": "1570288",
+        "creator": "Thiago Vieira",
+        "userActual": "Jorge Paiva",
+        "responsible": "Jorge Paiva",
+        "priority": "3",
+        "project": "0.1. - Product Backlog - GM WEB - Controladores",
+        "title": "Front-end do módulo Controladores (blazor)",
+        "taskType": "new func",
+        "dateInserted": "2020-01-17 09:42:04.355",
+        "dateScheduledStart": null,
+        "dateScheduledEnd": null,
+        "dateStart": null,
+        "dateEnd": null,
+        "taskState": {
+            "code": "20",
+            "description": "Curso"
+        }
+    },
+    {
+        "id": "1583154",
+        "creator": "Jorge Paiva",
+        "userActual": "Jorge Paiva",
+        "responsible": "Jorge Paiva",
+        "priority": "3",
+        "project": "0.1. - Product Backlog - GM WEB - Encomendas",
+        "title": "Encomendas Tecelagem",
+        "taskType": "new func OM8",
+        "dateInserted": "2022-12-21 16:10:43.794",
+        "dateScheduledStart": null,
+        "dateScheduledEnd": null,
+        "dateStart": null,
+        "dateEnd": null,
+        "taskState": {
+            "code": "20",
+            "description": "Curso"
+        }
+    },
+    {
+        "id": "1583155",
+        "creator": "Jorge Paiva",
+        "userActual": "Jorge Paiva",
+        "responsible": "Jorge Paiva",
+        "priority": "3",
+        "project": "0.1. - Product Backlog - GM WEB - Encomendas",
+        "title": "Encomendas Globais",
+        "taskType": "new func OM8",
+        "dateInserted": "2022-12-21 16:11:09.137",
+        "dateScheduledStart": null,
+        "dateScheduledEnd": null,
+        "dateStart": null,
+        "dateEnd": null,
+        "taskState": {
+            "code": "20",
+            "description": "Curso"
+        }
+    },
+    {
+        "id": "1583156",
+        "creator": "Jorge Paiva",
+        "userActual": "Jorge Paiva",
+        "responsible": "Jorge Paiva",
+        "priority": "3",
+        "project": "0.1. - Product Backlog - GM WEB - Encomendas",
+        "title": "Encomendas Fábrica",
+        "taskType": "new func OM8",
+        "dateInserted": "2022-12-21 16:11:53.655",
+        "dateScheduledStart": null,
+        "dateScheduledEnd": null,
+        "dateStart": null,
+        "dateEnd": null,
+        "taskState": {
+            "code": "20",
+            "description": "Curso"
+        }
+    },
+    {
+        "id": "1583157",
+        "creator": "Jorge Paiva",
+        "userActual": "Jorge Paiva",
+        "responsible": "Jorge Paiva",
+        "priority": "3",
+        "project": "0.1. - Product Backlog - GM WEB - Encomendas",
+        "title": "Encomendas Tinturaria",
+        "taskType": "new func OM8",
+        "dateInserted": "2022-12-21 16:12:18.801",
+        "dateScheduledStart": null,
+        "dateScheduledEnd": null,
+        "dateStart": null,
+        "dateEnd": null,
+        "taskState": {
+            "code": "20",
+            "description": "Curso"
+        }
+    },
+    {
+        "id": "1583158",
+        "creator": "Jorge Paiva",
+        "userActual": "Jorge Paiva",
+        "responsible": "Jorge Paiva",
+        "priority": "3",
+        "project": "0.1. - Product Backlog - GM WEB - Controladores",
+        "title": "Back-end do módulo de Controladores",
+        "taskType": "new func OM8",
+        "dateInserted": "2022-12-21 16:17:12.829",
+        "dateScheduledStart": null,
+        "dateScheduledEnd": null,
+        "dateStart": null,
+        "dateEnd": null,
+        "taskState": {
+            "code": "20",
+            "description": "Curso"
+        }
+    },
+    {
+        "id": "1583244",
+        "creator": "Jorge Paiva",
+        "userActual": "Jorge Paiva",
+        "responsible": "Jorge Paiva",
+        "priority": "3",
+        "project": "0.1. - Product Backlog - GM WEB - Desenvolvimentos",
+        "title": "Updater Web",
+        "taskType": "new func OM8",
+        "dateInserted": "2022-12-29 12:17:59.779",
+        "dateScheduledStart": null,
+        "dateScheduledEnd": null,
+        "dateStart": null,
+        "dateEnd": null,
+        "taskState": {
+            "code": "20",
+            "description": "Curso"
+        }
+    },
+    {
+        "id": "1584578",
+        "creator": "Jorge Paiva",
+        "userActual": "Jorge Paiva",
+        "responsible": "Jorge Paiva",
+        "priority": "3",
+        "project": "0.1. - Product Backlog - GM WEB - Desenvolvimentos",
+        "title": "Controlo de sessões",
+        "taskType": "Tech Improv",
+        "dateInserted": "2023-03-08 18:30:59.626",
+        "dateScheduledStart": null,
+        "dateScheduledEnd": null,
+        "dateStart": null,
+        "dateEnd": null,
+        "taskState": {
+            "code": "20",
+            "description": "Curso"
+        }
+    },
+    {
+        "id": "1585028",
+        "creator": "Jorge Paiva",
+        "userActual": "Jorge Paiva",
+        "responsible": "Jorge Paiva",
+        "priority": "3",
+        "project": "Cordeiro Campos - Quantidade Documentos Entrada Peças",
+        "title": "Quantidade Documentos Entrada Peças",
+        "taskType": "new func",
+        "dateInserted": "2023-04-06 17:07:09.515",
+        "dateScheduledStart": null,
+        "dateScheduledEnd": null,
+        "dateStart": null,
+        "dateEnd": null,
+        "taskState": {
+            "code": "20",
+            "description": "Curso"
+        }
+    },
+    {
+        "id": "1585389",
+        "creator": "Jorge Paiva",
+        "userActual": "Jorge Paiva",
+        "responsible": "Jorge Paiva",
+        "priority": "3",
+        "project": "0.1. - Product Backlog - GM WEB - Desenvolvimentos",
+        "title": "Janela de Artigos",
+        "taskType": "new func",
+        "dateInserted": "2023-05-12 00:00:00.0",
+        "dateScheduledStart": null,
+        "dateScheduledEnd": null,
+        "dateStart": null,
+        "dateEnd": null,
+        "taskState": {
+            "code": "20",
+            "description": "Curso"
+        }
+    },
+    {
+        "id": "1585511",
+        "creator": "Jorge Paiva",
+        "userActual": "Jorge Paiva",
+        "responsible": "Jorge Paiva",
+        "priority": "3",
+        "project": "Sonix - Layouts Controladores",
+        "title": "Layout Controlo Qualidade",
+        "taskType": "Assistência",
+        "dateInserted": "2023-05-22 00:00:00.0",
+        "dateScheduledStart": null,
+        "dateScheduledEnd": null,
+        "dateStart": null,
+        "dateEnd": null,
+        "taskState": {
+            "code": "20",
+            "description": "Curso"
+        }
+    },
+    {
+        "id": "1586023",
+        "creator": "Jorge Paiva",
+        "userActual": "Jorge Paiva",
+        "responsible": "Jorge Paiva",
+        "priority": "3",
+        "project": "0.1. - Product Backlog - GM WEB - Desenvolvimentos",
+        "title": "Melhoramentos",
+        "taskType": "Implementação",
+        "dateInserted": "2023-07-03 00:00:00.0",
+        "dateScheduledStart": null,
+        "dateScheduledEnd": null,
+        "dateStart": null,
+        "dateEnd": null,
+        "taskState": {
+            "code": "20",
+            "description": "Curso"
+        }
+    },
+    {
+        "id": "1586258",
+        "creator": "Jorge Paiva",
+        "userActual": "Jorge Paiva",
+        "responsible": "Jorge Paiva",
+        "priority": "3",
+        "project": "0.1. - Product Backlog - GM WEB - Desenvolvimentos",
+        "title": "Janela de Entidades",
+        "taskType": "new func OM8",
+        "dateInserted": "2023-07-21 00:00:00.0",
+        "dateScheduledStart": null,
+        "dateScheduledEnd": null,
+        "dateStart": null,
+        "dateEnd": null,
+        "taskState": {
+            "code": "20",
+            "description": "Curso"
+        }
+    },
+    {
+        "id": "1586903",
+        "creator": "Cristiana Fernandes",
+        "userActual": "Jorge Paiva",
+        "responsible": "Jorge Paiva",
+        "priority": "3",
+        "project": "Paco - Assistência Software",
+        "title": "Erro no programa das auditorias dos tablets ",
+        "taskType": "Assistência",
+        "dateInserted": "2023-10-10 15:49:19.151",
+        "dateScheduledStart": null,
+        "dateScheduledEnd": null,
+        "dateStart": null,
+        "dateEnd": null,
+        "taskState": {
+            "code": "20",
+            "description": "Curso"
+        }
+    },
+    {
+        "id": "1586982",
+        "creator": "Jorge Paiva",
+        "userActual": "Jorge Paiva",
+        "responsible": "Jorge Paiva",
+        "priority": "3",
+        "project": "Diastextil - Assistência Software",
+        "title": "Controladores",
+        "taskType": "Assistência",
+        "dateInserted": "2023-10-16 00:00:00.0",
+        "dateScheduledStart": null,
+        "dateScheduledEnd": null,
+        "dateStart": null,
+        "dateEnd": null,
+        "taskState": {
+            "code": "20",
+            "description": "Curso"
+        }
+    },
+    {
+        "id": "1587200",
+        "creator": "Jorge Paiva",
+        "userActual": "Jorge Paiva",
+        "responsible": "Jorge Paiva",
+        "priority": "3",
+        "project": "0.1. - Product Backlog - GM WEB - Desenvolvimentos",
+        "title": "Janela Fichas Técnicas",
+        "taskType": "new func",
+        "dateInserted": "2023-10-30 00:00:00.0",
+        "dateScheduledStart": null,
+        "dateScheduledEnd": null,
+        "dateStart": null,
+        "dateEnd": null,
+        "taskState": {
+            "code": "20",
+            "description": "Curso"
+        }
+    },
+    {
+        "id": "1587506",
+        "creator": "Jorge Paiva",
+        "userActual": "Jorge Paiva",
+        "responsible": "Jorge Paiva",
+        "priority": "3",
+        "project": "0.1. - Product Backlog - I&D",
+        "title": "Conetor",
+        "taskType": "Outras ND",
+        "dateInserted": "2023-11-23 00:00:00.0",
+        "dateScheduledStart": null,
+        "dateScheduledEnd": null,
+        "dateStart": null,
+        "dateEnd": null,
+        "taskState": {
+            "code": "20",
+            "description": "Curso"
+        }
+    },
+    {
+        "id": "1588680",
+        "creator": "Jorge Paiva",
+        "userActual": "Jorge Paiva",
+        "responsible": "Jorge Paiva",
+        "priority": "3",
+        "project": "0.1. - Product Backlog - GM WEB - Desenvolvimentos",
+        "title": "Update Core e Frameworks",
+        "taskType": "Implementação",
+        "dateInserted": "2024-02-28 09:40:20.338",
+        "dateScheduledStart": null,
+        "dateScheduledEnd": null,
+        "dateStart": null,
+        "dateEnd": null,
+        "taskState": {
+            "code": "20",
+            "description": "Curso"
+        }
+    },
+    {
+        "id": "1588959",
+        "creator": "Jorge Paiva",
+        "userActual": "Jorge Paiva",
+        "responsible": "Jorge Paiva",
+        "priority": "3",
+        "project": "0.1. - Product Backlog - GM WEB - Receções",
+        "title": "Entrada de Peças",
+        "taskType": "new func",
+        "dateInserted": "2024-03-14 00:00:00.0",
+        "dateScheduledStart": null,
+        "dateScheduledEnd": null,
+        "dateStart": null,
+        "dateEnd": null,
+        "taskState": {
+            "code": "20",
+            "description": "Curso"
+        }
+    },
+    {
+        "id": "1589471",
+        "creator": "Jorge Paiva",
+        "userActual": "Jorge Paiva",
+        "responsible": "Jorge Paiva",
+        "priority": "3",
+        "project": "0.1. - Product Backlog - GM WEB - Receções",
+        "title": "Receção Matérias Primas",
+        "taskType": "new func OM8",
+        "dateInserted": "2024-04-17 00:00:00.0",
+        "dateScheduledStart": null,
+        "dateScheduledEnd": null,
+        "dateStart": null,
+        "dateEnd": null,
+        "taskState": {
+            "code": "20",
+            "description": "Curso"
+        }
+    },
+    {
+        "id": "1590324",
+        "creator": "Jorge Paiva",
+        "userActual": "Jorge Paiva",
+        "responsible": "Jorge Paiva",
+        "priority": "3",
+        "project": "Browning - Order Management – Meses de visibilidade por família",
+        "title": "Implementação Meses Familia",
+        "taskType": "new func OM8",
+        "dateInserted": "2024-06-27 09:51:32.898",
+        "dateScheduledStart": null,
+        "dateScheduledEnd": null,
+        "dateStart": null,
+        "dateEnd": null,
+        "taskState": {
+            "code": "20",
+            "description": "Curso"
+        }
+    },
+    {
+        "id": "1590997",
+        "creator": "Jorge Paiva",
+        "userActual": "Jorge Paiva",
+        "responsible": "Jorge Paiva",
+        "priority": "3",
+        "project": "0.1. - Product Backlog - GM WEB - Desenvolvimentos",
+        "title": "Novo Design",
+        "taskType": "Tech Improv OM8",
+        "dateInserted": "2024-08-12 00:00:00.0",
+        "dateScheduledStart": null,
+        "dateScheduledEnd": null,
+        "dateStart": null,
+        "dateEnd": null,
+        "taskState": {
+            "code": "20",
+            "description": "Curso"
+        }
+    },
+    {
+        "id": "1591226",
+        "creator": "Pedro Ribeiro",
+        "userActual": "Jorge Paiva",
+        "responsible": "Pedro Ribeiro",
+        "priority": "3",
+        "project": "Sonix - Interface Konica",
+        "title": "Configurações gerais",
+        "taskType": "Assistência",
+        "dateInserted": "2024-09-18 11:13:08.58",
+        "dateScheduledStart": null,
+        "dateScheduledEnd": null,
+        "dateStart": null,
+        "dateEnd": null,
+        "taskState": {
+            "code": "20",
+            "description": "Curso"
+        }
+    },
+    {
+        "id": "1591641",
+        "creator": "Mónica Lima",
+        "userActual": "Jorge Paiva",
+        "responsible": "Jorge Paiva",
+        "priority": "3",
+        "project": "Malhas Sonix - Assistência Software",
+        "title": "Receções intermédias não aparecem para validar",
+        "taskType": "Assistência",
+        "dateInserted": "2024-10-16 10:11:08.886",
+        "dateScheduledStart": null,
+        "dateScheduledEnd": null,
+        "dateStart": null,
+        "dateEnd": null,
+        "taskState": {
+            "code": "50",
+            "description": "Aguardar"
+        }
+    },
+    {
+        "id": "1586964",
+        "creator": "Jorge Paiva",
+        "userActual": "Jorge Paiva",
+        "responsible": "Jorge Paiva",
+        "priority": "3",
+        "project": "Browning - Alterações não Orçamentadas",
+        "title": "Alterações Prémio Mérito",
+        "taskType": "new func",
+        "dateInserted": "2023-10-13 00:00:00.0",
+        "dateScheduledStart": null,
+        "dateScheduledEnd": null,
+        "dateStart": null,
+        "dateEnd": null,
+        "taskState": {
+            "code": "60",
+            "description": "Prg OK - Aguarda Teste"
+        }
+    },
+    {
+        "id": "1590270",
+        "creator": "Jorge Paiva",
+        "userActual": null,
+        "responsible": "Jorge Paiva",
+        "priority": "3",
+        "project": "Sonix - Interface Konica",
+        "title": "Criação de Documentos",
+        "taskType": "Assistência",
+        "dateInserted": "2024-06-24 09:20:10.743",
+        "dateScheduledStart": null,
+        "dateScheduledEnd": null,
+        "dateStart": null,
+        "dateEnd": null,
+        "taskState": {
+            "code": "20",
+            "description": "Curso"
+        }
+    }
+]

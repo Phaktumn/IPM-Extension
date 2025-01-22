@@ -1,0 +1,73 @@
+{
+  "manifest_version": 3,
+  "name": "Better File Explorer for Chrome",
+  "version": "1.0.0",
+  "description": "Better File Explorer for Chrome",
+  "icons": {
+    "16": "images/file-explorer-icon.png",
+    "32": "images/file-explorer-icon.png",
+    "48": "images/file-explorer-icon.png",
+    "128": "images/file-explorer-icon.png"
+  },
+  "action": {
+    "default_popup": "popup.html"
+  },
+  "permissions": [
+    "nativeMessaging",
+    "contextMenus",
+    "storage",
+    "scripting",
+    "tabs"
+  ],
+  "background": {
+    "service_worker": "background.js"
+  },
+  "content_scripts": [
+    {
+      "css": [
+        "styles.css"
+      ],
+      "js": [
+        "content.js"
+      ],
+      "matches": [
+        "file://*"
+      ]
+    },
+    {
+      "js": [
+        "content.js"
+      ],
+      "css": [
+        "ipm-styles.css"
+      ],
+      "matches": [
+        "http://ipm.macwin.pt:83/*"
+      ]
+    },
+    {
+      "run_at": "document_start",
+      "matches": [
+        "http://ipm.macwin.pt/*"
+      ],
+      "js": [
+        "content_script_docstart.js"
+      ]
+    },
+    {
+      "all_frames": true,
+      "matches": [
+        "http://ipm.macwin.pt/*"
+      ],
+      "js": [
+        "content_script.js"
+      ]
+    }
+  ],
+  "options_page": "options/index.html",
+  "author": "fskjorge@gmail.com",
+  "host_permissions": [
+    "file://*",
+    "http://ipm.macwin.pt/*"
+  ]
+}
