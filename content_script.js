@@ -1,21 +1,25 @@
 if (!window.alreadyExecuted) {
     window.addEventListener('click', evt => {
-        if (!evt.isTrusted) return;
-        let target = evt.target;
-        while (target && target.tagName.toLowerCase() !== 'a' && target.tagName.toLowerCase() !== 'area') {
-            target = target.parentElement;
-        }
-        if (target) {
-            const url = target instanceof SVGAElement ? target.href.baseVal : target.href;
-            if (url.startsWith('file://')) {
-                evt.preventDefault();
-                try {
-                    chrome.runtime.sendMessage({
-                        method: 'openLocalFile',
-                        localFileUrl: url,
-                    });
-                } catch (e) { }
+        try {
+            if (!evt.isTrusted) return;
+            let target = evt.target;
+            while (target && target.tagName.toLowerCase() !== 'a' && target.tagName.toLowerCase() !== 'area') {
+                target = target.parentElement;
             }
+            if (target) {
+                const url = target instanceof SVGAElement ? target.href.baseVal : target.href;
+                if (url.startsWith('file://')) {
+                    evt.preventDefault();
+                    try {
+                        chrome.runtime.sendMessage({
+                            method: 'openLocalFile',
+                            localFileUrl: url,
+                        });
+                    } catch (e) { }
+                }
+            }
+        } catch (error) {
+            // Ignored
         }
     }, {
         capture: true,
@@ -132,8 +136,7 @@ if (window.location.href === 'http://ipm.macwin.pt:83/task_communication.html') 
     }
 }
 
-if (window.location.href === 'http://ipm.macwin.pt:83/tasks.html') 
-    {
+if (window.location.href === 'http://ipm.macwin.pt:83/tasks.html') {
     const labels = document.querySelectorAll('#searchMyTasks-form > fieldset > dl > dt');
     labels.forEach(x => { x.classList.add('pt-10'); });
 }

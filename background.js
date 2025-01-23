@@ -11,20 +11,22 @@ const addClickEventListenerToExistingTab = async () => {
 		url: '*://*/*', // only http:// or https:// page
 	}, tabs => {
 		tabs.forEach(tab => {
-			chrome.scripting.executeScript({
-				files: [
-					'content_script.js',
-				],
-				target: {
-					tabId: tab.id,
-					allFrames: true,
-				},
-			}, result => {
-				if (typeof result === 'undefined') {
-					const message = chrome.i18n.getMessage('page_not_loaded');
-					console.info(message, tab);
-				}
-			});
+			if (tab.url.includes('ipm.macwin.pt')) {
+				chrome.scripting.executeScript({
+					files: [
+						'content_script.js',
+					],
+					target: {
+						tabId: tab.id,
+						allFrames: true,
+					},
+				}, result => {
+					if (typeof result === 'undefined') {
+						const message = chrome.i18n.getMessage('page_not_loaded');
+						console.info(message, tab);
+					}
+				});
+			}
 		});
 	});
 };
@@ -60,7 +62,7 @@ chrome.runtime.onMessage.addListener((message, sender) => {
 });
 
 
-const openTab = (url, baseTab, callback = () => {}) => {
+const openTab = (url, baseTab, callback = () => { }) => {
 	chrome.tabs.create({
 		url,
 		index: baseTab.index + 1,
