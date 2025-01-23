@@ -100,7 +100,8 @@ td:not(:first-child) {
 }
 
 /* CSS */
-button#back {
+button#back, button#cpyurl {
+  width: 130px;
   align-items: center;
   background-color: #2b2a33;
   border: 1px solid #6b6b6b;
@@ -129,17 +130,24 @@ button#back {
   vertical-align: middle;
 }
 
-button#back>span {
+button#cpyurl
+{
+  margin-top: 1rem;
+}
+
+button#back>span, button#cpyurl>span {
   font-size: large;
 }
 
 button#back:hover,
-button#back:focus {
+button#back:focus,
+button#cpyurl:hover,
+button#cpyurl:focus {
   background-color: #23222b;
   color: #ffffff;
 }
 
-button#back:active {
+button#back:active, button#cpyurl:active {
   background: #23222b;
   color: #ffffff;
 }

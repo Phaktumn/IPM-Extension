@@ -46,7 +46,7 @@ if (!currentUrl.includes('ipm.macwin.pt'))
 
     var tag = document.createElement("div");
     tag.id  = 'parentDirLinkBox';
-    tag.style += 'display: block; position: sticky; top: 100px; transform: translate(-150px, 0px); height: 0px; display: flex; flex-direction: column; width: 100px;'
+    tag.style += 'display: block; position: sticky; top: 100px; transform: translate(-180px, 0px); height: 0px; display: flex; flex-direction: column; width: 100px;'
 
     var tagChild = document.createElement('button');
     tagChild.id = 'back';
@@ -56,14 +56,28 @@ if (!currentUrl.includes('ipm.macwin.pt'))
       var reqUrl = urlPaths.join('/');
       window.location = reqUrl;
     }
-    
+
     var childSpan = document.createElement('span');
     childSpan.id = 'parendDirText';
     childSpan.textContent = 'Back';
     
     tagChild.appendChild(childSpan);
 
+    var btnCpyUrl = document.createElement('button');
+    btnCpyUrl.id = 'cpyurl';
+    btnCpyUrl.class ='icon up';
+    btnCpyUrl.onclick = function() {
+      navigator.clipboard.writeText(window.location.href);
+      alert("Text copied: " + window.location.href);
+    }
+    var btnCpyUrlchildSpan = document.createElement('span');
+    btnCpyUrlchildSpan.id = 'parendDirTextCpy';
+    btnCpyUrlchildSpan.textContent = 'Copy Path';
+    
+    btnCpyUrl.appendChild(btnCpyUrlchildSpan);
+
     tag.appendChild(tagChild);
+    tag.appendChild(btnCpyUrl);
 
     bodyPre.insertBefore(tag, pre);
   }
