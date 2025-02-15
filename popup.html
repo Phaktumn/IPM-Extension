@@ -1,42 +1,41 @@
-<!doctype html>
+<!DOCTYPE html>
 <!--
  This page is shown when the extension button is clicked, because the
  "browser_action" field in manifest.json contains the "default_popup" key with
  value "popup.html".
  -->
 <html>
-
-<head>
+  <head>
     <title>Extension's Popup</title>
     <style>
-        * {
-            box-sizing: border-box;
-        }
-        
-        body {
-            font-family: "Segoe UI", "Lucida Grande", Tahoma, sans-serif;
-            font-size: 100%;
-        }
+      * {
+        box-sizing: border-box;
+      }
 
-        #status {
-            /* avoid an excessively wide status text */
-            white-space: pre;
-            text-overflow: ellipsis;
-            overflow: hidden;
-            max-width: 400px;
-        }
+      body {
+        font-family: "Segoe UI", "Lucida Grande", Tahoma, sans-serif;
+        font-size: 100%;
+      }
 
-        .column {
-            float: left;
-            width: 50%;
-            padding: 10px;
-        }
+      #status {
+        /* avoid an excessively wide status text */
+        white-space: pre;
+        text-overflow: ellipsis;
+        overflow: hidden;
+        max-width: 400px;
+      }
 
-        .row:after {
-            content: "";
-            display: table;
-            clear: both;
-        }
+      .column {
+        float: left;
+        width: 50%;
+        padding: 10px;
+      }
+
+      .row:after {
+        content: "";
+        display: table;
+        clear: both;
+      }
     </style>
 
     <!--
@@ -46,76 +45,131 @@
       - [1]: https://developer.chrome.com/extensions/contentSecurityPolicy
      -->
     <script src="popup.js"></script>
+  </head>
 
-</head>
-
-<body style="width: 500px !important;">
+  <body style="width: 500px !important">
     <div class="row">
-        <div class="column" style="width: 250px;">
+      <input
+        id="openClientConfigsFile"
+        name="clientConfigTarget"
+        type="checkbox"
+      />
+      <label for="clientConfigTarget"
+        >Open Client Configuration File directly instead of folder.</label
+      >
+      <small>
+        This value only takes effect after reloading the page.
+        <a id="reload" style="cursor: pointer; text-decoration: underline;">Reload?</a>
+      </small>
 
-            <h2>Tables</h2>
-            <b> Header Color </b>
-            <p>
-                <input type="color" id="headerclr" value="#ff0000">
-            </p>
+      <div class="column" style="width: 250px">
+        <h2>Tables</h2>
 
-            <b> Footer Color </b>
-            <p>
-                <input type="color" id="footerclr" value="#ff0000">
-            </p>
-
-            <b> Border Color </b>
-            <p>
-                <input type="color" id="tborderclr" value="#ff0000">
-            </p>
-
-            <h2>Tabs</h2>
-            <b> Bottom Color Active </b>
-            <p>
-                <input type="color" id="tabBtmClr" value="#ff0000">
-            </p>
-
-            <b> Bottom Color Inactive </b>
-            <p>
-                <input type="color" id="tabInactiveBtmClr" value="#ff0000">
-            </p>
-
+        <div style="margin-top: 0.5rem">
+          <input type="color" id="headerclr" name="headerclr" value="#ff0000" />
+          <label for="headerclr">Header Color</label>
         </div>
 
-        <div class="column" style="width: 250px;">
-            <h2>Date Picker</h2>
-            
-            <b> Today Background </b>
-            <p>
-                <input type="color" id="dpbgtoday" value="#ff0000">
-            </p>
-            <b> Hover Border </b>
-            <p>
-                <input type="color" id="dpborderhover" value="#ff0000">
-            </p>
-            <b> Hover Background </b>
-            <p>
-                <input type="color" id="dpbgthover" value="#ff0000">
-            </p>
-            <b> Selected Border </b>
-            <p>
-                <input type="color" id="dpselectedborder" value="#ff0000">
-            </p>
-            <b> Selected Background </b>
-            <p>
-                <input type="color" id="dpselectedbg" value="#ff0000">
-            </p>
-            <b> Text Hover </b>
-            <p>
-                <input type="color" id="dptexthover" value="#ff0000">
-            </p>
-            <b> Text Default </b>
-            <p>
-                <input type="color" id="dptextdefault" value="#ff0000">
-            </p>
-
+        <div style="margin-top: 0.5rem">
+          <input type="color" id="footerclr" name="footerclr" value="#ff0000" />
+          <label for="footerclr">Footer Color</label>
         </div>
+
+        <div style="margin-top: 0.5rem">
+          <input
+            type="color"
+            id="tborderclr"
+            name="tborderclr"
+            value="#ff0000"
+          />
+          <label for="tborderclr">Border Color</label>
+        </div>
+
+        <h2>Tabs</h2>
+        <div style="margin-top: 0.5rem">
+          <input type="color" id="tabBtmClr" name="tabBtmClr" value="#ff0000" />
+          <label for="tabBtmClr">Bottom Color Active</label>
+        </div>
+
+        <div style="margin-top: 0.5rem">
+          <input
+            type="color"
+            id="tabInactiveBtmClr"
+            name="tabInactiveBtmClr"
+            value="#ff0000"
+          />
+          <label for="tabInactiveBtmClr">Bottom Color Inactive</label>
+        </div>
+      </div>
+
+      <div class="column" style="width: 250px">
+        <h2>Date Picker</h2>
+
+        <div style="margin-top: 0.5rem">
+          <input type="color" id="dpbgtoday" name="dpbgtoday" value="#ff0000" />
+          <label for="dpbgtoday">Today Background</label>
+        </div>
+
+        <div style="margin-top: 0.5rem">
+          <input
+            type="color"
+            id="dpborderhover"
+            name="dpborderhover"
+            value="#ff0000"
+          />
+          <label for="dpborderhover">Hover Border</label>
+        </div>
+
+        <div style="margin-top: 0.5rem">
+          <input
+            type="color"
+            id="dpbgthover"
+            name="dpbgthover"
+            value="#ff0000"
+          />
+          <label for="dpbgthover">Hover Background</label>
+        </div>
+
+        <div style="margin-top: 0.5rem">
+          <input
+            type="color"
+            id="dpselectedborder"
+            name="dpselectedborder"
+            value="#ff0000"
+          />
+          <label for="dpselectedborder">Selected Border</label>
+        </div>
+
+        <div style="margin-top: 0.5rem">
+          <input
+            type="color"
+            id="dpselectedbg"
+            name="dpselectedbg"
+            value="#ff0000"
+          />
+          <label for="dpselectedbg">Selected Background</label>
+        </div>
+
+        <div style="margin-top: 0.5rem">
+          <input
+            type="color"
+            id="dptexthover"
+            name="dptexthover"
+            value="#ff0000"
+          />
+          <label for="dptexthover">Text Hover</label>
+        </div>
+
+        <div style="margin-top: 0.5rem">
+          <input
+            type="color"
+            id="dptextdefault"
+            name="dptextdefault"
+            value="#ff0000"
+          />
+          <label for="dpbordedptextdefaultrover">Text Default</label>
+        </div>
+      </div>
     </div>
-</body>
-
+  </body>
 </html>

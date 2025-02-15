@@ -1,4 +1,5 @@
 const options = {
+    fileCheck: 'false',
     headercolor: '#ffffff',
     footercolor: '#ffffff',
     tablebordercolor: '#ffffff',
@@ -25,6 +26,17 @@ chrome.storage.local.get("options").then(r => {
         
         const elements = setListeners();
         Object.assign(options, r.options);
+        
+        document.querySelector("a#reload").onclick = function() { 
+            chrome.tabs.query({active: true, currentWindow: true}, function(tabs) {
+                chrome.tabs.reload(tabs[0].id);
+            });
+        };
+
+        
+        if (options.fileCheck === 'true') {
+            elements.clientFileCheck.setAttribute('checked', '');
+        }
         elements.header.setAttribute('value', options.headercolor);
         elements.footer.setAttribute('value', options.footercolor);
         elements.border.setAttribute('value', options.tablebordercolor);
@@ -44,6 +56,7 @@ chrome.storage.local.get("options").then(r => {
 
 function getElements() {
     return {
+        clientFileCheck: document.getElementById('openClientConfigsFile'),
         header: document.getElementById('headerclr'),
         footer: document.getElementById('footerclr'),
         border: document.getElementById('tborderclr'),
@@ -124,6 +137,11 @@ function setListeners() {
         options.datepicker.selectedbgcolor = event.target.value;
         saveSettings();
     });
+
+    elements.clientFileCheck.addEventListener('click', (event) => {
+        options.fileCheck = options.fileCheck === 'false' ? 'true' : 'false';
+        saveSettings();
+    })
 
     return elements;
 }
