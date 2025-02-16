@@ -7,7 +7,7 @@ const options = {
         activebottomcolor: '#ffffff',
         inactivebottomcolor: '#ffffff',
     },
-    datepicker : {
+    datepicker: {
         todaybgcolor: '#feda58',
         hoverbordercolor: '#000000',
         hoverbgcolor: '#ffffff',
@@ -23,17 +23,17 @@ chrome.storage.local.get("options").then(r => {
         if (r.options === undefined) {
             chrome.storage.local.set({ options }).then(() => { console.log("Value was null and was set"); });
         }
-        
+
         const elements = setListeners();
         Object.assign(options, r.options);
-        
-        document.querySelector("a#reload").onclick = function() { 
-            chrome.tabs.query({active: true, currentWindow: true}, function(tabs) {
+
+        document.querySelector("a#reload").onclick = function () {
+            chrome.tabs.query({ active: true, currentWindow: true }, function (tabs) {
                 chrome.tabs.reload(tabs[0].id);
             });
         };
 
-        
+
         if (options.fileCheck === 'true') {
             elements.clientFileCheck.setAttribute('checked', '');
         }
@@ -41,14 +41,14 @@ chrome.storage.local.get("options").then(r => {
         elements.footer.setAttribute('value', options.footercolor);
         elements.border.setAttribute('value', options.tablebordercolor);
         elements.tabs.active.setAttribute('value', options.tabs.activebottomcolor);
-        elements.tabs.inactive.setAttribute('value', options.tabs.inactivebottomcolor); 
-        elements.datepicker.hoverbgcolor.setAttribute('value', options.datepicker.hoverbgcolor); 
-        elements.datepicker.hoverbordercolor.setAttribute('value', options.datepicker.hoverbordercolor); 
-        elements.datepicker.textcolor.setAttribute('value', options.datepicker.textcolor); 
-        elements.datepicker.texthovercolor.setAttribute('value', options.datepicker.texthovercolor); 
-        elements.datepicker.todaybgcolor.setAttribute('value', options.datepicker.todaybgcolor); 
-        elements.datepicker.selectedbordercolor.setAttribute('value', options.datepicker.selectedbordercolor); 
-        elements.datepicker.selectedbgcolor.setAttribute('value', options.datepicker.selectedbgcolor); 
+        elements.tabs.inactive.setAttribute('value', options.tabs.inactivebottomcolor);
+        elements.datepicker.hoverbgcolor.setAttribute('value', options.datepicker.hoverbgcolor);
+        elements.datepicker.hoverbordercolor.setAttribute('value', options.datepicker.hoverbordercolor);
+        elements.datepicker.textcolor.setAttribute('value', options.datepicker.textcolor);
+        elements.datepicker.texthovercolor.setAttribute('value', options.datepicker.texthovercolor);
+        elements.datepicker.todaybgcolor.setAttribute('value', options.datepicker.todaybgcolor);
+        elements.datepicker.selectedbordercolor.setAttribute('value', options.datepicker.selectedbordercolor);
+        elements.datepicker.selectedbgcolor.setAttribute('value', options.datepicker.selectedbgcolor);
     } catch (error) {
         console.log(error);
     }
@@ -64,7 +64,7 @@ function getElements() {
             active: document.getElementById('tabBtmClr'),
             inactive: document.getElementById('tabInactiveBtmClr')
         },
-        datepicker : {
+        datepicker: {
             todaybgcolor: document.getElementById('dpbgtoday'),
             hoverbordercolor: document.getElementById('dpborderhover'),
             hoverbgcolor: document.getElementById('dpbgthover'),
@@ -96,8 +96,8 @@ function setListeners() {
     elements.tabs.active.addEventListener("change", (event) => {
         options.tabs.activebottomcolor = event.target.value;
         saveSettings();
-    });    
-    
+    });
+
     elements.tabs.inactive.addEventListener("change", (event) => {
         options.tabs.inactivebottomcolor = event.target.value;
         saveSettings();

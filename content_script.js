@@ -1,47 +1,44 @@
+const ClosedStateValue = 'close';
+const OpenStateValue = 'open';
+const StateAttributeName = 'state';
 const baseUrl = 'http://ipm.macwin.pt:83/';
 const pages = [
-    { url: `task_dashboard.html`, f: processTaskDashboard },
-    { url: `clients.html`, f: processClientsPage },
-    { url: `task_communication.html`, f: processTaskPage },
-    { url: 'tasks.html', f: processTasksPage }
+    { url: `task_dashboard.html`, handler: processTaskDashboard },
+    { url: `clients.html`, handler: processClientsPage },
+    { url: `task_communication.html`, handler: processTasksPage },
+    { url: 'tasks.html', handler: processTasksPage }
 ]
 
-pages.forEach(page => {
-    if (window.location.href === `${baseUrl}${page.url}`) {
+pages.forEach(({ url, handler }) => {
+    if (window.location.href === `${baseUrl}${url}`) {
         try {
-            page.f();
+            handler();
         } catch (error) {
-            console.log(error);
+            console.error(`Error processing ${url}:`, error);
         }
     }
 })
 
 function processTasksPage() {
-    const labels = document.querySelectorAll('#searchMyTasks-form > fieldset > dl > dt');
-    labels.forEach(x => { x.classList.add('pt-10'); });
+    document.querySelectorAll('#searchMyTasks-form > fieldset > dl > dt')
+        .forEach(label => label.classList.add('pt-10'));
 }
 
-
 function processClientsPage() {
-    var currentUrl = window.location.href;
-    if (currentUrl.endsWith('/')) {
-        currentUrl = currentUrl.slice(0, -1);
-    }
     let actions = document.querySelectorAll('td.actions');
     actions.forEach(async element => {
         try {
-            var codCliente = element.parentElement.getAttribute('data-code');
-            var copySpan = element.querySelector('span#copy-path');
-            let folderLink = copySpan.getAttribute('data-server-folder-link');
+            let codCliente = element.parentElement.getAttribute('data-code');
+            let copySpan = element.querySelector('span#copy-path');
+            let folderLink = copySpan?.getAttribute('data-server-folder-link') || '';
 
-            let result = await chrome.storage.local.get("options");
-            if (result.options.fileCheck === "true") {
-                folderLink = `${folderLink}\\${codCliente}.txt`
+            const { options } = await chrome.storage.local.get("options");
+            if (options?.fileCheck === "true") {
+                folderLink += `\\${codCliente}.txt`;
             }
-            
-            let taskClientBtn = element.querySelector('span#create-task-client');
 
-            element.removeChild(copySpan);
+            let taskClientBtn = element.querySelector('span#create-task-client');
+            copySpan?.remove();
 
             let newSpan = document.createElement('span');
             newSpan.innerText = 'content_copy';
@@ -58,12 +55,75 @@ function processClientsPage() {
             });
             element.insertBefore(newSpan, taskClientBtn);
         } catch (error) {
+            console.error('Error processing client actions:', error);
         }
     });
 }
 
 function processTaskDashboard() {
-    // Create expandable groups
+    let headers = document.querySelectorAll("#tbl_tasks > tbody > tr[data-title=data-subtitle]");
+
+    headers.forEach(header => {
+        let headerRowContent = header.querySelector('td');
+        var text = headerRowContent.innerText;
+        headerRowContent.innerText = '';
+
+        let button = createButton(text);
+        headerRowContent.appendChild(button);
+
+        changeLinesState(header, button, changeState(header, ClosedStateValue));
+
+        button.addEventListener('click', (e) => {
+            changeLinesState(header, e.target.parentElement, changeState(header));
+        });
+
+    });
+
+    function changeState(element, state = null) {
+        let open = false;
+        let stateAttribute = element.getAttribute(StateAttributeName);
+        if (stateAttribute === null) 
+            stateAttribute = ClosedStateValue;
+        open = stateAttribute === OpenStateValue;
+        element.setAttribute(StateAttributeName,
+            state && (state === OpenStateValue || state === ClosedStateValue) ?
+                state :
+                open ? ClosedStateValue : OpenStateValue);
+        return element.getAttribute(StateAttributeName) === OpenStateValue;
+    }
+
+    /**
+     * Creates a button with a icon and label
+     * @param {*} text Label content
+     * @returns Button Element
+     */
+    function createButton(text) {
+        let button = document.createElement('button');
+        button.className = 'expand-button';
+
+        let buttonlabel = document.createElement('span');
+        buttonlabel.className = 'expand-btn-label';
+        buttonlabel.innerText = text.replace(/\s/g, '').replace('Ordenar', '');
+
+        let btnIcon = document.createElement('span');
+        btnIcon.className = 'material-icons material-symbols-rounded btnIcon';
+        btnIcon.innerText = 'arrow_drop_up'
+
+        button.appendChild(btnIcon);
+        button.appendChild(buttonlabel);
+
+        return button;
+    }
+
+    function changeLinesState(header, btn, state) {
+        let btnIcon = btn.querySelector('span.btnIcon');
+        btnIcon.innerText = state ? 'arrow_drop_up' : 'arrow_drop_down';
+        let sibling = header.nextElementSibling;
+        while (sibling && !sibling.classList.contains('header')) {
+            sibling.style.visibility = state ? 'visible' : 'collapse';
+            sibling = sibling.nextElementSibling;
+        }
+    }
 
     // Align elements
     {
@@ -78,7 +138,7 @@ function processTaskDashboard() {
                     });
                 }
             });
-    
+
             colGroups[0].classList.add('task-dashboard-label-group-small');
             colGroups[0].querySelectorAll('dt').forEach(e => {
                 e.classList.add('label-small');
@@ -94,18 +154,13 @@ function processTaskDashboard() {
             //Check "Somente favoritos:""
             checkBoxes[5].classList.add('w130label');
         }
-    
+
         const filterGroup = document.querySelectorAll('#main > dl > *');
         if (filterGroup) {
             filterGroup[0].style.marginTop = '5px';
             filterGroup[1].classList.add('pt-0');
         }
     }
-}
-
-function processTaskPage() {
-    const labels = document.querySelectorAll('#searchMyTasks-form > fieldset > dl > dt');
-    labels.forEach(x => { x.classList.add('pt-10'); });
 }
 
 if (!window.alreadyExecuted) {
@@ -137,19 +192,16 @@ if (!window.alreadyExecuted) {
 }
 
 chrome.runtime.onMessage.addListener((message, sender, sendResponse) => {
-    if (message.method == 'reload') {
-        reload();
+    if (message.method === 'reload') {
+        reloadStyles();
         sendResponse({ ok: true });
     }
 });
 
 function reload() {
-    var elements = document.querySelectorAll('link[rel=stylesheet][href]');
-    for (var i = 0, element; element = elements[i]; i++) {
-        var href = element.href;
-        var href = href.replace(/[?&]cssReloader=([^&$]*)/, '');
-        element.href = href + (href.indexOf('?') >= 0 ? '&' : '?') + 'cssReloader=' + (new Date().valueOf());
-    }
+    document.querySelectorAll('link[rel=stylesheet][href]').forEach(link => {
+        link.href = link.href.replace(/[?&]cssReloader=\d+/, '') + `?cssReloader=${Date.now()}`;
+    });
 }
 
 window.alreadyExecuted = true;
