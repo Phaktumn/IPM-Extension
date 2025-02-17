@@ -1,5 +1,10 @@
 /**
- * CSS Changes apply here
+ * This script runs in "ISOLATED" world 
+ * which is the execution environment unique to the content script.
+ * 
+ * "run_at": "document_start"
+ * "matches": ["http://ipm.macwin.pt/*"]
+ * "js": ["utils.js", "content_script_docstart.js"]
  */
 
 chrome.storage.local.get("options").then(res => {

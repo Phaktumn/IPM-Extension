@@ -103,7 +103,10 @@ function processTaskDashboard() {
 
         let buttonlabel = document.createElement('span');
         buttonlabel.className = 'expand-btn-label';
-        buttonlabel.innerText = text.replace(/\s/g, '').replace('Ordenar', '');
+        buttonlabel.innerText = text
+            .replace(/\s/g, '')
+            .replace('Ordenar', '')
+            .replace(/([A-Z])/g, " $1").trim();
 
         let btnIcon = document.createElement('span');
         btnIcon.className = 'material-icons material-symbols-rounded btnIcon';

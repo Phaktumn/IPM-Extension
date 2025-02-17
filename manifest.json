@@ -24,50 +24,39 @@
   },
   "content_scripts": [
     {
-      "css": [
-        "styles.css"
-      ],
-      "js": [
-        "content.js"
-      ],
-      "matches": [
-        "file://*"
-      ]
+      "css": ["styles.css"],
+      "js": ["utils.js", "content.js"],
+      "matches": ["file://*"]
     },
     {
-      "js": [
-        "content.js"
-      ],
-      "css": [
-        "ipm-styles.css"
-      ],
-      "matches": [
-        "http://ipm.macwin.pt:83/*"
-      ]
+      "js": ["utils.js", "content.js"],
+      "css": ["ipm-styles.css"],
+      "matches": ["http://ipm.macwin.pt:83/*"]
+    },
+    {
+      "world": "MAIN",
+      "run_at": "document_start",
+      "matches": ["http://ipm.macwin.pt/*"],
+      "js": ["utils.js", "content_script_docstart_MAIN.js"]
     },
     {
       "run_at": "document_start",
-      "matches": [
-        "http://ipm.macwin.pt/*"
-      ],
-      "js": [
-        "content_script_docstart.js"
-      ]
+      "matches": ["http://ipm.macwin.pt/*"],
+      "js": ["utils.js", "content_script_docstart.js"]
     },
     {
       "all_frames": true,
-      "matches": [
-        "http://ipm.macwin.pt/*"
-      ],
-      "js": [
-        "content_script.js"
-      ]
+      "matches": ["http://ipm.macwin.pt/*"],
+      "js": ["utils.js", "content_script.js"]
     }
   ],
   "options_page": "options/index.html",
   "author": "fskjorge@gmail.com",
-  "host_permissions": [
-    "file://*",
-    "http://ipm.macwin.pt/*"
-  ]
+  "web_accessible_resources": [
+    {
+      "resources": ["utils.js"],
+      "matches": ["<all_urls>"]
+    }
+  ],
+  "host_permissions": ["file://*", "http://ipm.macwin.pt/*"]
 }
