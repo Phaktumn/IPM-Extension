@@ -3,21 +3,93 @@ const OpenStateValue = 'open';
 const StateAttributeName = 'state';
 const baseUrl = 'http://ipm.macwin.pt:83/';
 const pages = [
+    { url: ``, handler: processDefault },
     { url: `task_dashboard.html`, handler: processTaskDashboard },
     { url: `clients.html`, handler: processClientsPage },
     { url: `task_communication.html`, handler: processTasksPage },
-    { url: 'tasks.html', handler: processTasksPage }
+    { url: 'tasks.html', handler: processTasksPage },
+    { url: 'week_progress.html', handler: processWeekProgress }
 ]
 
 pages.forEach(({ url, handler }) => {
-    if (window.location.href === `${baseUrl}${url}`) {
+    if (window.location.href.includes(`${baseUrl}${url}`) || url.length === 0) {
         try {
             handler();
         } catch (error) {
-            console.error(`Error processing ${url}:`, error);
+            console.log(`Error processing ${url}:`, error);
         }
     }
 })
+
+/** 
+ * Reestruturar o HEADER
+ * 
+ * "element.appendChild" utizado para mover os Elementos 
+ */
+function processDefault() {
+    const header = document.querySelector("body > header");
+    const userInfo = document.querySelector("#header-user-info");
+    const menu = document.querySelector("#main-menu");
+
+    header.appendChild(menu);
+    header.appendChild(userInfo);
+
+    document.querySelector("#main_nav").remove();
+
+    const logoutRef = "/logout.html";
+    const name = userInfo.querySelector("p > a").textContent;
+    const accountRef = "/account/account.html";
+
+    userInfo.remove();
+
+    header.append(
+        createElement(
+            'section',
+            {
+                style: "width: auto; display: flex;"
+            },
+            [
+                createElement(
+                    'div',
+                    {
+                        style: "align-self: center; align-self: center; margin-bottom: 5px;"
+                    },
+                    [
+                        createElement(
+                            'a',
+                            {
+                                style: "text-decoration: none; color: var(--text);",
+                                href: accountRef
+                            },
+                            [
+                                name
+                            ]
+                        )
+                    ]
+                ),
+                createElement(
+                    'button',
+                    {
+                        class: "logout-btn"
+                    },
+                    [
+                        createElement(
+                            'a',
+                            {
+                                style: "text-decoration: none; color: var(--text);",
+                                class: "material-icons material-symbols-rounded",
+                                href: logoutRef
+                            },
+                            [
+                                "logout"
+                            ]
+                        )
+                    ]
+                )
+            ]
+        )
+    );
+}
 
 function processTasksPage() {
     document.querySelectorAll('#searchMyTasks-form > fieldset > dl > dt')
@@ -60,6 +132,154 @@ function processClientsPage() {
     });
 }
 
+function processWeekProgress() {
+    const main = document.querySelector('#main');
+    const prevElement = document.querySelector("#table-configure-columns");
+
+    document.querySelector("#main > h2").remove();
+    document.querySelectorAll("#main > div")[8].remove();
+
+    let cy = getCurrentYear();
+    let cw = getISOWeekOfYear(new Date());
+
+    const params = getUrlParams();
+    const year = !params.year ? cy : params.year;
+    const week = !params.week ? cw : params.week;
+    const selectedYear = parseInt(year);
+    const selectedWeek = parseInt(week);
+
+    function highlightText() {
+        let searchText = document.getElementById("searchBox").value.toLowerCase();
+        let table = document.getElementById("tbl_weekly");
+        let cells = table.querySelectorAll("td>span>a");
+        for (let cell of cells) {
+            let text = cell.textContent.toLowerCase();
+            if (searchText && text.includes(searchText)) {
+                cell.classList.add("highlight");
+            } else {
+                cell.classList.remove("highlight");
+            }
+        }
+    }
+
+    function getMonthName(monthNumber) {
+        const months = [
+            "Jan", "Fev", "Mar", "Abr", "Mai", "Jun",
+            "Jul", "Ago", "Set", "Out", "Nov", "Dez"
+        ];
+        return months[monthNumber];
+    }
+
+    const prevWeekDays = getWeekStartEnd(selectedYear, selectedWeek - 1);
+    const currentWeekDays = getWeekStartEnd(selectedYear, selectedWeek);
+    const nextWeekDays = getWeekStartEnd(selectedYear, selectedWeek + 1);
+
+    prevElement.insertAdjacentHTML('afterend',
+        `<div style="display: flex;">
+      <div id="progressyearscontainer" style="padding: 1rem;">
+        <select id="progressyears">
+          <option ${selectedYear === 2026 ? "selected" : ""} value="2026">2026</option>  
+          <option ${selectedYear === 2025 ? "selected" : ""} value="2025">2025</option>
+          <option ${selectedYear === 2024 ? "selected" : ""} value="2024">2024</option>
+          <option ${selectedYear === 2023 ? "selected" : ""} value="2023">2023</option>
+          <option ${selectedYear === 2022 ? "selected" : ""} value="2022">
+          2022</option>
+          <option ${selectedYear === 2021 ? "selected" : ""} value="2021">2021</option>
+        </select>
+      </div>
+
+      <div id="progressweekcontainer">
+        <div class="weekselect">
+          <button id="prevweek" style="margin-left: 10px;">
+            <span class="material-icons material-symbols-rounded">chevron_left</span>
+          </button>
+
+          <a href="week_progress.html?week=${selectedWeek - 1 <= 0 ? 52 : selectedWeek - 1}&year=${selectedWeek - 1 <= 0 ? selectedYear - 1 : selectedYear}" id="bt-prevweek" style="margin: 5px;">
+            ${prevWeekDays.startDate.getDate()} ${getMonthName(prevWeekDays.startDate.getMonth())} - ${prevWeekDays.endDate.getDate()} ${getMonthName(prevWeekDays.endDate.getMonth())}
+          </a>
+          <div id="currweek" class="current-week" style="margin: 5px;">
+            ${currentWeekDays.startDate.getDate()} ${getMonthName(currentWeekDays.startDate.getMonth())} - ${currentWeekDays.endDate.getDate()} ${getMonthName(currentWeekDays.endDate.getMonth())}
+          </div>
+          <a href="week_progress.html?week=${selectedWeek + 1 > 52 ? 1 : selectedWeek + 1}&year=${selectedWeek + 1 > 52 ? selectedYear + 1 : selectedYear}" id="bt-nextweek" style="margin: 5px;">
+            ${nextWeekDays.startDate.getDate()} ${getMonthName(nextWeekDays.startDate.getMonth())} - ${nextWeekDays.endDate.getDate()} ${getMonthName(nextWeekDays.endDate.getMonth())}
+          </a>
+
+          <button id="nextweek" class="" style="margin-right: 10px;">
+            <span class="material-icons material-symbols-rounded">chevron_right</span>
+          </button>
+        </div>
+      </div>
+
+      <div style="display: flex; width: 483px; border: solid #ced4da; border-width: 1px 1px 1px 0 !important; align-items: anchor-center;">
+        <span class="material-icons material-symbols-rounded search-icon">search</span>
+        <input style="border: none; width: 100%;" type="text" id="searchBox" placeholder="Enter text to highlight">
+      </div>
+    </div>`
+    );
+
+    function moveWeek(moveAmount) {
+        // Calculate new week value
+        let newWeekValue = selectedWeek + moveAmount;
+        let newYearValue = selectedYear;
+        
+        // Handle year boundary crossing
+        if (newWeekValue <= 0) {
+            newWeekValue = 52 + newWeekValue; // If negative, wrap around from the end of previous year
+            newYearValue = selectedYear - 1;
+        } else if (newWeekValue > 52) {
+            newWeekValue = newWeekValue - 52; // If exceeds 52, wrap around to the start of next year
+            newYearValue = selectedYear + 1;
+        }
+        
+        const url = `week_progress.html?week=${newWeekValue}&year=${newYearValue}`;
+        createElement(
+            'a',
+            {
+                href: url
+            }
+        ).click();
+    }
+
+    document.querySelector("#prevweek").addEventListener('click', (e) => {
+        moveWeek(-1);
+    });
+    document.querySelector("#nextweek").addEventListener('click', (e) => {
+        moveWeek(1);
+    });
+
+    document.querySelector('#searchBox').addEventListener(
+        'input',
+        () => {
+            console.log('Input!');
+            highlightText();
+        }
+    );
+
+    document.querySelector('#progressyears').addEventListener(
+        'change',
+        (event) => {
+            const params = getUrlParams();
+            const url = `week_progress.html?week=${params.week}&year=${event.target.value}`;
+            createElement(
+                'a',
+                {
+                    href: url
+                }
+            ).click();
+        }
+    );
+
+    /*const docImages = document.querySelectorAll("img.note");
+    docImages.forEach((e) => { 
+        let parent = e.parentElement;
+        parent.className = "material-icons material-symbols-rounded";
+        parent.style.fontSize = "small";
+        parent.style.float = "right";
+        parent.style.padding = "2px";
+        parent.textContent = 'article';
+    });*/
+}
+
 function processTaskDashboard() {
     let headers = document.querySelectorAll("#tbl_tasks > tbody > tr[data-title=data-subtitle]");
 
@@ -82,7 +302,7 @@ function processTaskDashboard() {
     function changeState(element, state = null) {
         let open = false;
         let stateAttribute = element.getAttribute(StateAttributeName);
-        if (stateAttribute === null) 
+        if (stateAttribute === null)
             stateAttribute = ClosedStateValue;
         open = stateAttribute === OpenStateValue;
         element.setAttribute(StateAttributeName,

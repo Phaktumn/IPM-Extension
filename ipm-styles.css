@@ -25,9 +25,18 @@
   --datepicker-selected-bg-color: #f7f7f7;
 }
 
+* {
+  font-family: var(--global-font-family) !important;
+}
+
+.icon,
+[class*="material-icons"],
+[class*="material-symbols"] {
+  font-family: "Material Icons" !important;
+}
+
 body {
   font-family: var(--global-font-family) !important;
-  /* To use the system default font. */
   line-height: 1.5;
   font-size: 0.95em;
   color: var(--text) !important;
@@ -338,11 +347,14 @@ ul.reset {
 }
 
 #main-menu {
+  width: 615px !important;
+  padding: 0 !important;
   background-image: none !important;
   border-radius: 0 !important;
   box-shadow: none !important;
   background-color: #f3f3f3 !important;
 }
+
 
 #main-menu a {
   font-family: var(--global-font-family) !important;
@@ -363,6 +375,9 @@ tfoot {
 
 table {
   border: 1px solid var(--table-border-color) !important;
+}
+
+header {
 }
 
 .select2-container .select2-choice {
@@ -387,6 +402,11 @@ table {
 }
 
 #main-menu {
+  background: white !important;
+  align-content: center;
+  padding: 0;
+  height: 80px;
+
   font-family: var(--global-font-family) !important;
   font-size: 2em;
 }
@@ -396,6 +416,10 @@ table {
   background-color: white !important;
   background-image: none !important;
   border-radius: 5px !important;
+}
+
+section#header-user-info {
+  width: auto;
 }
 
 .menu-separator {
@@ -663,4 +687,85 @@ div#ui-datepicker-div {
 .expand-btn-label {
   font-weight: bold;
 }
+
 /* [Tarefas] Expand group Button */
+
+.expand-button {
+  display: flex;
+  background-color: transparent;
+  color: black;
+  padding-left: 5px;
+  cursor: pointer;
+  border: none;
+  align-items: center;
+}
+
+.btnIcon {
+  padding: 0 !important;
+  font-size: 15px !important;
+  margin-right: 5px;
+}
+
+.expand-btn-label {
+  font-weight: bold;
+}
+
+/* [Tarefas] Expand group Button */
+
+#progressweekcontainer {
+  width: 100%;
+  padding: 0.5rem !important;
+  border: solid #ced4da;
+  border-width: 1px 1px 1px 0px;
+}
+
+#progressweekcontainer > div.weekselect {
+  color: var(--text);
+  align-items: center;
+  display: flex;
+  justify-content: between;
+  height: 100%;
+  border-radius: 5px;
+  background-color: #f5f6f8;
+  width: fit-content;
+}
+
+div#currweek.current-week {
+ font-weight: bold; 
+ background: white;
+ padding: 5px;
+ border-radius: 5px;
+}
+
+#prevweek, #nextweek {
+  padding: 0 !important;
+  border: 0 !important;
+  background: transparent;
+}
+
+#bt-nextweek,#bt-prevweek {
+  color: var(--text);
+  text-decoration: none;
+ }
+
+#progressyearscontainer {
+  padding: 1rem;
+  border: 1px solid #ced4da;
+  width: 168px;
+}
+
+#progressyears {
+  width: 100%;
+  border: 0 !important;
+}
+
+.highlight {
+  background-color: yellow;
+}
+
+.logout-btn {
+  padding: 0.5rem;
+  font-size: 1.5rem;
+  background: transparent !important;
+  border: none !important;
+}

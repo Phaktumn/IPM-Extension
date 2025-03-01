@@ -46,7 +46,7 @@
     },
     {
       "all_frames": true,
-      "matches": ["http://ipm.macwin.pt/*"],
+      "matches": ["http://ipm.macwin.pt:*/*"],
       "js": ["utils.js", "content_script.js"]
     }
   ],
