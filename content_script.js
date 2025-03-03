@@ -30,7 +30,7 @@ function processDefault() {
     const header = document.querySelector("body > header");
     const userInfo = document.querySelector("#header-user-info");
     const menu = document.querySelector("#main-menu");
-	
+
 
     header.appendChild(menu);
     header.appendChild(userInfo);
@@ -42,16 +42,6 @@ function processDefault() {
     const accountRef = "/account/account.html";
 
     userInfo.remove();
-	
-	document.querySelectorAll("#tbl_weekly").forEach((table) => {
-    if (!table.closest("form")) {  
-        table.classList.remove("tbl_tasks");
-        table.classList.add("tbl_time");
-    }else{
-		table.classList.remove("tbl_tasks");
-        table.classList.add("form_table");
-	}
-});
 
     header.append(
         createElement(
@@ -102,6 +92,15 @@ function processDefault() {
     );
 }
 
+document.querySelectorAll("#tbl_weekly").forEach((table) => {
+    if (!table.closest("form")) {
+        table.classList.remove("tbl_tasks");
+        table.classList.add("tbl_time");
+    } else {
+        table.classList.remove("tbl_tasks");
+        table.classList.add("form_table");
+    }
+});
 
 function processTasksPage() {
     document.querySelectorAll('#searchMyTasks-form > fieldset > dl > dt')
@@ -232,7 +231,7 @@ function processWeekProgress() {
         // Calculate new week value
         let newWeekValue = selectedWeek + moveAmount;
         let newYearValue = selectedYear;
-        
+
         // Handle year boundary crossing
         if (newWeekValue <= 0) {
             newWeekValue = 52 + newWeekValue; // If negative, wrap around from the end of previous year
@@ -241,7 +240,7 @@ function processWeekProgress() {
             newWeekValue = newWeekValue - 52; // If exceeds 52, wrap around to the start of next year
             newYearValue = selectedYear + 1;
         }
-        
+
         const url = `week_progress.html?week=${newWeekValue}&year=${newYearValue}`;
         createElement(
             'a',

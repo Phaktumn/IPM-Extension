@@ -40,6 +40,13 @@ body {
   -webkit-text-size-adjust: 100%;
 }
 
+#task_details{
+	font-family: var(--global-font-family) !important;
+}
+
+#task_details dl.innerDL, .table-dd dl.innerDL{
+	font-family: var(--global-font-family) !important;
+}
 /* Headings */
 h1 {
   font-size: 2em;
@@ -862,4 +869,29 @@ div#currweek.current-week {
 /* Texto do conteudo da Kanban Board */
 .dd-item {
   font-family: var(--global-font-family) !important;
+}
+
+/* Ensure dl behaves like a flex container but stays left-aligned */
+#main > div:nth-child(15) > fieldset > dl {
+    display: flex;
+    align-items: center; 
+    gap: 10px; 
+}
+
+/* Ensure dt (label) is properly aligned */
+#main > div:nth-child(15) > fieldset > dl > dt {
+    font-weight: bold;
+    text-align: left;
+}
+
+/* Ensure dd (which contains the dropdown) is aligned properly */
+#main > div:nth-child(15) > fieldset > dl > dd {
+    display: flex;
+    align-items: center;
+}
+
+/* Style for the select dropdown */
+#numRows {
+    width: 80px;
+    text-align: center;
 }
