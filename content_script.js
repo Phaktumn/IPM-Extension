@@ -30,6 +30,7 @@ function processDefault() {
     const header = document.querySelector("body > header");
     const userInfo = document.querySelector("#header-user-info");
     const menu = document.querySelector("#main-menu");
+	
 
     header.appendChild(menu);
     header.appendChild(userInfo);
@@ -41,6 +42,16 @@ function processDefault() {
     const accountRef = "/account/account.html";
 
     userInfo.remove();
+	
+	document.querySelectorAll("#tbl_weekly").forEach((table) => {
+    if (!table.closest("form")) {  
+        table.classList.remove("tbl_tasks");
+        table.classList.add("tbl_time");
+    }else{
+		table.classList.remove("tbl_tasks");
+        table.classList.add("form_table");
+	}
+});
 
     header.append(
         createElement(
@@ -90,6 +101,7 @@ function processDefault() {
         )
     );
 }
+
 
 function processTasksPage() {
     document.querySelectorAll('#searchMyTasks-form > fieldset > dl > dt')
@@ -182,8 +194,7 @@ function processWeekProgress() {
           <option ${selectedYear === 2025 ? "selected" : ""} value="2025">2025</option>
           <option ${selectedYear === 2024 ? "selected" : ""} value="2024">2024</option>
           <option ${selectedYear === 2023 ? "selected" : ""} value="2023">2023</option>
-          <option ${selectedYear === 2022 ? "selected" : ""} value="2022">
-          2022</option>
+          <option ${selectedYear === 2022 ? "selected" : ""} value="2022">2022</option>
           <option ${selectedYear === 2021 ? "selected" : ""} value="2021">2021</option>
         </select>
       </div>
@@ -210,7 +221,7 @@ function processWeekProgress() {
         </div>
       </div>
 
-      <div style="display: flex; width: 483px; border: solid #ced4da; border-width: 1px 1px 1px 0 !important; align-items: anchor-center;">
+      <div id="searchBoxInput" class="" style="display: flex; align-items: anchor-center;">
         <span class="material-icons material-symbols-rounded search-icon">search</span>
         <input style="border: none; width: 100%;" type="text" id="searchBox" placeholder="Enter text to highlight">
       </div>
@@ -279,6 +290,21 @@ function processWeekProgress() {
         parent.textContent = 'article';
     });*/
 }
+
+document.addEventListener("DOMContentLoaded", function () {
+    let clientDiv = document.getElementById("s2id_client1");
+    let projectDiv = document.getElementById("s2id_project1");
+
+    if (clientDiv) {
+        clientDiv.style.width = "100px"; // Change width
+        clientDiv.classList.add("updated-client"); // Add new class
+    }
+
+    if (projectDiv) {
+        projectDiv.style.width = "270px"; // Change width
+        projectDiv.classList.add("updated-project"); // Add new class
+    }
+});
 
 function processTaskDashboard() {
     let headers = document.querySelectorAll("#tbl_tasks > tbody > tr[data-title=data-subtitle]");

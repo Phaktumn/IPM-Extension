@@ -25,10 +25,6 @@
   --datepicker-selected-bg-color: #f7f7f7;
 }
 
-* {
-  font-family: var(--global-font-family) !important;
-}
-
 .icon,
 [class*="material-icons"],
 [class*="material-symbols"] {
@@ -751,12 +747,19 @@ div#currweek.current-week {
 #progressyearscontainer {
   padding: 1rem;
   border: 1px solid #ced4da;
-  width: 168px;
+  width: 160px;
 }
 
 #progressyears {
   width: 100%;
   border: 0 !important;
+}
+
+
+#searchBoxInput{
+	width: 730px; 
+	border: solid #ced4da; 
+	border-width: 1px 1px 1px 0 !important;
 }
 
 .highlight {
@@ -768,4 +771,95 @@ div#currweek.current-week {
   font-size: 1.5rem;
   background: transparent !important;
   border: none !important;
+}
+
+
+/* tabela */
+#tbl_weekly table-container {
+  width: 100%;
+  overflow-x: auto;
+}
+
+#tbl_weekly.tbl_time {
+  width: 100%;
+  min-width: 800px;
+  border-collapse: collapse;
+  table-layout: fixed;
+}
+
+#tbl_weekly.tbl_time th, 
+#tbl_weekly.tbl_time td {
+  padding: 8px;
+  text-align: left;
+  white-space: nowrap;
+  border: 1px solid #ccc;
+}
+
+#tbl_weekly.tbl_time thead {
+  background-color: #eaeaea;
+  position: sticky;
+  top: 0;
+  z-index: 10;
+}
+
+
+#tbl_weekly.tbl_time th:nth-child(1), 
+#tbl_weekly.tbl_time td:nth-child(1) { width: 100px !important; } /* Cliente */
+
+#tbl_weekly.tbl_time th:nth-child(2), 
+#tbl_weekly.tbl_time td:nth-child(2) { width: 270px !important; } /* Projeto */
+
+#tbl_weekly.tbl_time th:nth-child(3), 
+#tbl_weekly.tbl_time td:nth-child(3) { width: 450px !important; } /* Título */
+
+#tbl_weekly.tbl_time th:nth-child(4), 
+#tbl_weekly.tbl_time td:nth-child(4) { width: 50px !important; } /* Time code */
+
+#tbl_weekly.tbl_time th:nth-child(5), 
+#tbl_weekly.tbl_time td:nth-child(5) { width: 50px !important; }  /* SEG */
+
+#tbl_weekly.tbl_time th:nth-child(6), 
+#tbl_weekly.tbl_time td:nth-child(6) { width: 50px !important; }  /* TER */
+
+#tbl_weekly.tbl_time th:nth-child(7), 
+#tbl_weekly.tbl_time td:nth-child(7) { width: 50px !important; }  /* QUA */
+
+#tbl_weekly.tbl_time th:nth-child(8), 
+#tbl_weekly.tbl_time td:nth-child(8) { width: 50px !important; }  /* QUI */
+
+#tbl_weekly.tbl_time th:nth-child(9), 
+#tbl_weekly.tbl_time td:nth-child(9) { width: 50px !important; }  /* SEX */
+
+#tbl_weekly.tbl_time th:nth-child(10), 
+#tbl_weekly.tbl_time td:nth-child(10) { width: 50px !important; } /* SAB */
+
+#tbl_weekly.tbl_time th:nth-child(11), 
+#tbl_weekly.tbl_time td:nth-child(11) { width: 50px !important; } /* DOM */
+
+
+/* Corrigir a font aplicada nos elementos do editor TinyMCE */
+.ui-widget, 
+.ui-widget input, 
+.ui-widget select, 
+.ui-widget textarea, 
+.ui-widget button,
+
+.mce-container:not(.mce-ico), 
+.mce-container *:not(.mce-ico),
+.mce-widget:not(.mce-ico),
+.mce-widget *:not(.mce-ico),
+.mce-reset:not(.mce-ico) {
+  font-family: var(--global-font-family) !important;
+}
+
+/* Fix no padding do header da kanban board
+  estava a tirar-me do serio
+*/
+.kanban__title > h2 {
+  padding: 2px 1em 4px !important;
+}
+
+/* Texto do conteudo da Kanban Board */
+.dd-item {
+  font-family: var(--global-font-family) !important;
 }
