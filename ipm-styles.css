@@ -344,6 +344,7 @@ ul.reset {
 }
 
 #main {
+  padding-top: 1rem !important;
   border-radius: 0px !important;
   padding: 0 !important;
   border: none !important;
@@ -408,7 +409,7 @@ header {
   background: white !important;
   align-content: center;
   padding: 0;
-  height: 80px;
+  height: inherit;
 
   font-family: var(--global-font-family) !important;
   font-size: 2em;
@@ -798,8 +799,10 @@ div#currweek.current-week {
 #tbl_weekly.tbl_time td {
   padding: 8px;
   text-align: left;
-  white-space: nowrap;
+  white-space: normal;
+  word-wrap: break-word;
   border: 1px solid #ccc;
+  overflow: auto;
 }
 
 #tbl_weekly.tbl_time thead {
@@ -894,4 +897,12 @@ div#currweek.current-week {
 #numRows {
     width: 80px;
     text-align: center;
+}
+
+#main > div.details{
+	display: flex;
+    align-items: bottom; /* Aligns checkbox and label vertically */
+    justify-content: flex-end; /* Keeps alignment to the right */
+    gap: 5px; /* Adds spacing between checkbox and label */
+    float: none !important; /* Remove float */
 }
