@@ -30,7 +30,7 @@ function processDefault() {
     const header = document.querySelector("body > header");
     const userInfo = document.querySelector("#header-user-info");
     const menu = document.querySelector("#main-menu");
-
+	
 
     header.appendChild(menu);
     header.appendChild(userInfo);
@@ -42,7 +42,7 @@ function processDefault() {
     const accountRef = "/account/account.html";
 
     userInfo.remove();
-
+	
     header.append(
         createElement(
             'section',
@@ -92,14 +92,14 @@ function processDefault() {
     );
 }
 
-document.querySelectorAll("#tbl_weekly").forEach((table) => {
-    if (!table.closest("form")) {
+	document.querySelectorAll("#tbl_weekly").forEach((table) => {
+    if (!table.closest("form")) {  
         table.classList.remove("tbl_tasks");
         table.classList.add("tbl_time");
-    } else {
-        table.classList.remove("tbl_tasks");
+    }else{
+		table.classList.remove("tbl_tasks");
         table.classList.add("form_table");
-    }
+	}
 });
 
 function processTasksPage() {
@@ -231,7 +231,7 @@ function processWeekProgress() {
         // Calculate new week value
         let newWeekValue = selectedWeek + moveAmount;
         let newYearValue = selectedYear;
-
+        
         // Handle year boundary crossing
         if (newWeekValue <= 0) {
             newWeekValue = 52 + newWeekValue; // If negative, wrap around from the end of previous year
@@ -240,7 +240,7 @@ function processWeekProgress() {
             newWeekValue = newWeekValue - 52; // If exceeds 52, wrap around to the start of next year
             newYearValue = selectedYear + 1;
         }
-
+        
         const url = `week_progress.html?week=${newWeekValue}&year=${newYearValue}`;
         createElement(
             'a',
@@ -278,16 +278,35 @@ function processWeekProgress() {
             ).click();
         }
     );
+ 
+    
 
-    /*const docImages = document.querySelectorAll("img.note");
+    const docImages = document.querySelectorAll("img.note");
     docImages.forEach((e) => { 
         let parent = e.parentElement;
-        parent.className = "material-icons material-symbols-rounded";
-        parent.style.fontSize = "small";
+        parent.className = "material-symbols-outlined";
+        parent.style.fontSize = "medium";
         parent.style.float = "right";
         parent.style.padding = "2px";
-        parent.textContent = 'article';
-    });*/
+        parent.textContent = 'summarize';
+    });
+
+    const docSave =document.querySelector(".shortcutAddEditBtn");
+        docSave.className = "material-symbols-outlined";
+        docSave.style.fontSize = "x-large";
+        docSave.style.fontWeight='100';
+        docSave.style.float = "right";
+        docSave.style.padding = "2px";
+        docSave.textContent = 'save';
+   
+
+        const tbT =document.querySelector("#table_add_columns");
+        tbT.className = "material-symbols-outlined";
+        tbT.style.fontSize = "medium";
+        tbT.style.fontWeight='100';
+        tbT.style.float = "right";
+        tbT.style.padding = "2px";
+        tbT.textContent = 'manufacturing';
 }
 
 document.addEventListener("DOMContentLoaded", function () {

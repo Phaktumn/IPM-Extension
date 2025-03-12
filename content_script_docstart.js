@@ -9,9 +9,6 @@
 
 chrome.storage.local.get("options").then(res => {
     try {
-        document.documentElement.style.setProperty('--header-color', res.options.headercolor);
-        document.documentElement.style.setProperty('--footer-color', res.options.footercolor);
-        document.documentElement.style.setProperty('--table-border-color', res.options.tablebordercolor);
         document.documentElement.style.setProperty('--tab-bottom-color-active', res.options.tabs.activebottomcolor);
         document.documentElement.style.setProperty('--tab-bottom-color-inactive', res.options.tabs.inactivebottomcolor);
     

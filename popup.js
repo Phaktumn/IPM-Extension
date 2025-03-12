@@ -1,8 +1,5 @@
 const options = {
     fileCheck: 'false',
-    headercolor: '#ffffff',
-    footercolor: '#ffffff',
-    tablebordercolor: '#ffffff',
     tabs: {
         activebottomcolor: '#ffffff',
         inactivebottomcolor: '#ffffff',
@@ -37,9 +34,6 @@ chrome.storage.local.get("options").then(r => {
         if (options.fileCheck === 'true') {
             elements.clientFileCheck.setAttribute('checked', '');
         }
-        elements.header.setAttribute('value', options.headercolor);
-        elements.footer.setAttribute('value', options.footercolor);
-        elements.border.setAttribute('value', options.tablebordercolor);
         elements.tabs.active.setAttribute('value', options.tabs.activebottomcolor);
         elements.tabs.inactive.setAttribute('value', options.tabs.inactivebottomcolor);
         elements.datepicker.hoverbgcolor.setAttribute('value', options.datepicker.hoverbgcolor);
@@ -57,9 +51,7 @@ chrome.storage.local.get("options").then(r => {
 function getElements() {
     return {
         clientFileCheck: document.getElementById('openClientConfigsFile'),
-        header: document.getElementById('headerclr'),
-        footer: document.getElementById('footerclr'),
-        border: document.getElementById('tborderclr'),
+
         tabs: {
             active: document.getElementById('tabBtmClr'),
             inactive: document.getElementById('tabInactiveBtmClr')
