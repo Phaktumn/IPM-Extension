@@ -9,7 +9,6 @@
 
 chrome.storage.local.get("options").then((res) => {
   try {
-    console.log(res);
     document.documentElement.style.setProperty(
       "--tab-bottom-color-active",
       res.options.tabs.activebottomcolor
