@@ -11,6 +11,7 @@
 - Select the Project Folder
 
 ## Key Features 🎉
+
 - Improved file explorer for local files in Chrome
 - Improved design and usability
 - Compatible with Edge and other Chromium-based browsers
