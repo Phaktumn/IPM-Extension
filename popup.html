@@ -8,53 +8,96 @@
   <head>
     <title>Extension's Popup</title>
     <style>
-      * {
-        box-sizing: border-box;
+      :root {
+        --primary: #3b4758;
+        --accent: #feda58;
+        --bg: #f7f7f7;
+        --border: #e0e0e0;
+        --radius: 10px;
+        --shadow: 0 2px 8px rgba(60, 60, 60, 0.08);
       }
-
       body {
         font-family: "Segoe UI", "Lucida Grande", Tahoma, sans-serif;
-        font-size: 100%;
+        background: var(--bg);
+        margin: 0;
+        padding: 0;
+        width: 600px !important;
+        min-height: 420px;
+        color: var(--primary);
       }
-
-      #status {
-        /* avoid an excessively wide status text */
-        white-space: pre;
-        text-overflow: ellipsis;
-        overflow: hidden;
-        max-width: 400px;
+      .container {
+        display: flex;
+        gap: 24px;
+        padding: 24px;
       }
-
       .column {
-        float: left;
-        width: 50%;
-        padding: 10px;
+        flex: 1;
+        background: #fff;
+        border-radius: var(--radius);
+        box-shadow: var(--shadow);
+        padding: 20px 18px;
+        min-width: 220px;
       }
-
-      .row:after {
-        content: "";
-        display: table;
-        clear: both;
+      h2 {
+        margin-top: 0;
+        font-size: 1.2rem;
+        color: var(--primary);
+        border-bottom: 1px solid var(--border);
+        padding-bottom: 6px;
+        margin-bottom: 18px;
+        letter-spacing: 0.5px;
       }
-
       .margin-top {
-        margin-top: 0.5rem;
+        margin-top: 1rem;
+        display: flex;
+        align-items: center;
+        gap: 12px;
       }
-      
-      .column-w {
-        width: 250px
+      input[type="color"] {
+        border: none;
+        width: 32px;
+        height: 32px;
+        border-radius: 6px;
+        box-shadow: 0 1px 4px rgba(60, 60, 60, 0.10);
+        cursor: pointer;
+        transition: box-shadow 0.2s;
       }
-
+      input[type="color"]:focus {
+        box-shadow: 0 0 0 2px var(--accent);
+        outline: none;
+      }
+      label {
+        font-size: 1rem;
+        color: var(--primary);
+        cursor: pointer;
+      }
+      .row {
+        display: flex;
+        flex-direction: column;
+        gap: 4px;
+        margin: 24px 24px 0 24px;
+      }
+      .checkbox-group {
+        display: flex;
+        align-items: center;
+        gap: 8px;
+        margin-bottom: 8px;
+      }
       .reload {
-        cursor: pointer; 
-        text-decoration: underline
+        cursor: pointer;
+        text-decoration: underline;
+        color: var(--accent);
+        font-size: 0.95rem;
+        margin-left: 8px;
       }
-
-      body {
-        width: 500px !important;
+      small {
+        color: #888;
+        font-size: 0.92rem;
+        margin-top: 2px;
+        margin-bottom: 8px;
+        display: block;
       }
     </style>
-
     <!--
       - JavaScript and HTML must be in separate files: see our Content Security
       - Policy documentation[1] for details and explanation.
@@ -66,149 +109,66 @@
 
   <body>
     <div class="row">
-      <input
-        id="openClientConfigsFile"
-        name="clientConfigTarget"
-        type="checkbox"
-      >
-      <label for="clientConfigTarget"
-        >Open Client Configuration File directly instead of folder.</label
-      >
+      <div class="checkbox-group">
+        <input id="openClientConfigsFile" name="clientConfigTarget" type="checkbox">
+        <label for="clientConfigTarget">Open Client Configuration File directly instead of folder.</label>
+      </div>
       <small>
         This value only takes effect after reloading the page.
-        <a id="reload" class="reload"
-          >Reload?</a
-        >
+        <a id="reload" class="reload">Reload?</a>
       </small>
-
-      <div class="column column-w" >
-        <h2>Tables</h2>
-
-        <div class="margin-top">
-          <input type="color" id="headerclr" name="headerclr" value="#ff0000" >
-          <label for="headerclr">Header Color</label>
-        </div>
-
-        <div class="margin-top">
-          <input type="color" id="footerclr" name="footerclr" value="#ff0000" >
-          <label for="footerclr">Footer Color</label>
-        </div>
-
-        <div class="margin-top">
-          <input
-            type="color"
-            id="tborderclr"
-            name="tborderclr"
-            value="#ff0000"
-          >
-          <label for="tborderclr">Border Color</label>
-        </div>
-
+    </div>
+    <div class="container">
+      <div class="column">
         <h2>Tabs</h2>
         <div class="margin-top">
-          <input type="color" id="tabBtmClr" name="tabBtmClr" value="#ff0000" >
+          <input id="tabBtmClr" type="color" />
           <label for="tabBtmClr">Bottom Color Active</label>
         </div>
-
         <div class="margin-top">
-          <input
-            type="color"
-            id="tabInactiveBtmClr"
-            name="tabInactiveBtmClr"
-            value="#ff0000"
-          >
+          <input id="tabInactiveBtmClr" type="color" />
           <label for="tabInactiveBtmClr">Bottom Color Inactive</label>
         </div>
-      </div>
-
-      <div class="column column-w" >
-        <h2>Date Picker</h2>
-
+        <h2 class="margin-top">Avatar</h2>
         <div class="margin-top">
-          <input type="color" id="dpbgtoday" name="dpbgtoday" value="#ff0000" >
-          <label for="dpbgtoday">Today Background</label>
-        </div>
-
-        <div class="margin-top">
-          <input
-            type="color"
-            id="dpborderhover"
-            name="dpborderhover"
-            value="#ff0000"
-          >
-          <label for="dpborderhover">Hover Border</label>
-        </div>
-
-        <div class="margin-top">
-          <input
-            type="color"
-            id="dpbgthover"
-            name="dpbgthover"
-            value="#ff0000"
-          >
-          <label for="dpbgthover">Hover Background</label>
-        </div>
-
-        <div class="margin-top">
-          <input
-            type="color"
-            id="dpselectedborder"
-            name="dpselectedborder"
-            value="#ff0000"
-          >
-          <label for="dpselectedborder">Selected Border</label>
-        </div>
-
-        <div class="margin-top">
-          <input
-            type="color"
-            id="dpselectedbg"
-            name="dpselectedbg"
-            value="#ff0000"
-          >
-          <label for="dpselectedbg">Selected Background</label>
-        </div>
-
-        <div class="margin-top">
-          <input
-            type="color"
-            id="dptexthover"
-            name="dptexthover"
-            value="#ff0000"
-          >
-          <label for="dptexthover">Text Hover</label>
-        </div>
-
-        <div class="margin-top">
-          <input
-            type="color"
-            id="dptextdefault"
-            name="dptextdefault"
-            value="#ff0000"
-          >
-          <label for="dpbordedptextdefaultrover">Text Default</label>
-        </div>
-
-        <div class="margin-top">
-          <input
-            type="color"
-            id="avatarBg"
-            name="avatarBg"
-            value="#ff0000"
-          >
+          <input id="avatarBg" type="color" />
           <label for="avatarBg">Avatar Background Color</label>
         </div>
-
         <div class="margin-top">
-          <input
-            type="color"
-            id="avatarColor"
-            name="avatarColor"
-            value="#ff0000"
-          >
+          <input id="avatarColor" type="color" />
           <label for="avatarColor">Avatar Text Color</label>
         </div>
-
+      </div>
+      <div class="column">
+        <h2>Date Picker</h2>
+        <div class="margin-top">
+          <input id="dpbgtoday" type="color" />
+          <label for="dpbgtoday">Today Background</label>
+        </div>
+        <div class="margin-top">
+          <input id="dpborderhover" type="color" />
+          <label for="dpborderhover">Hover Border</label>
+        </div>
+        <div class="margin-top">
+          <input id="dpbgthover" type="color" />
+          <label for="dpbgthover">Hover Background</label>
+        </div>
+        <div class="margin-top">
+          <input id="dpselectedborder" type="color" />
+          <label for="dpselectedborder">Selected Border</label>
+        </div>
+        <div class="margin-top">
+          <input id="dpselectedbg" type="color" />
+          <label for="dpselectedbg">Selected Background</label>
+        </div>
+        <div class="margin-top">
+          <input id="dptexthover" type="color" />
+          <label for="dptexthover">Text Hover</label>
+        </div>
+        <div class="margin-top">
+          <input id="dptextdefault" type="color" />
+          <label for="dptextdefault">Text Default</label>
+        </div>
       </div>
     </div>
   </body>

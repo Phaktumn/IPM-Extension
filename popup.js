@@ -14,13 +14,14 @@ const options = {
     selectedbgcolor: "#f7f7f7",
   },
   profile: {
-    avatarBg: "#ffffff",
-    avatarColor: "#000000",
+    avatarBg: "#fff187",
+    avatarColor: "#751866",
   },
 };
 
 chrome.storage.local.get("options").then((r) => {
   try {
+    console.log("Options loaded", r.options);
     if (r.options === undefined) {
       chrome.storage.local.set({ options }).then(() => {
         console.log("Value was null and was set");
@@ -73,11 +74,9 @@ chrome.storage.local.get("options").then((r) => {
       options.datepicker.selectedbgcolor
     );
 
-    elements.datepicker.selectedAvatarBg.setAttribute(
-      "value",
-      options.profile.avatarBg
-    );
-    elements.datepicker.selectedAvatarColor.setAttribute(
+    // With these:
+    elements.profile.avatarBg.setAttribute("value", options.profile.avatarBg);
+    elements.profile.avatarColor.setAttribute(
       "value",
       options.profile.avatarColor
     );
@@ -112,20 +111,6 @@ function getElements() {
 
 function setListeners() {
   const elements = getElements();
-  elements.header.addEventListener("change", (event) => {
-    options.headercolor = event.target.value;
-    saveSettings();
-  });
-
-  elements.footer.addEventListener("change", (event) => {
-    options.footercolor = event.target.value;
-    saveSettings();
-  });
-
-  elements.border.addEventListener("change", (event) => {
-    options.tablebordercolor = event.target.value;
-    saveSettings();
-  });
 
   elements.tabs.active.addEventListener("change", (event) => {
     options.tabs.activebottomcolor = event.target.value;
@@ -179,11 +164,6 @@ function setListeners() {
       saveSettings();
     }
   );
-
-  elements.datepicker.selectedbgcolor.addEventListener("change", (event) => {
-    options.datepicker.selectedbgcolor = event.target.value;
-    saveSettings();
-  });
 
   elements.clientFileCheck.addEventListener("click", (event) => {
     options.fileCheck = options.fileCheck === "false" ? "true" : "false";

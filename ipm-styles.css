@@ -1079,10 +1079,10 @@ body > header > section:nth-child(3) {
 
 .user-avatar {
   display: inline-block;
-  background-color: #fff187;
+  background-color: var(--profile-avatar-bg);
   font-family: var(--global-font-family);
   font-size: 15px;
-  color: #751866;
+  color: var(--profile-avatar-color);
   /*
   text-shadow:
     -1px -1px 0 black,

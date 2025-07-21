@@ -49,11 +49,11 @@ chrome.storage.local.get("options").then((res) => {
 
     document.documentElement.style.setProperty(
       "--profile-avatar-bg",
-      res.options.datepicker.selectedbgcolor
+      res.options.profile.avatarBg
     );
     document.documentElement.style.setProperty(
       "--profile-avatar-color",
-      res.options.datepicker.selectedbgcolor
+      res.options.profile.avatarColor
     );
   } catch (error) {}
 });

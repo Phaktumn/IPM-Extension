@@ -79,23 +79,28 @@ const openTab = (url, baseTab, callback = () => {}) => {
 
 // background.js (Service Worker)
 self.addEventListener("fetch", (event) => {
+  const url = event.request.url;
+  if (url.startsWith("chrome-extension://")) {
+    // Don't cache extension resources
+    return;
+  }
   event.respondWith(
     caches
       .open("my-cache")
       .then((cache) => {
         return cache.match(event.request).then((response) => {
           if (response) {
-            return response; // Return the cached response if available
+            return response;
           }
           return fetch(event.request).then((networkResponse) => {
-            cache.put(event.request, networkResponse.clone()); // Cache the network response
+            cache.put(event.request, networkResponse.clone());
             return networkResponse;
           });
         });
       })
       .catch((error) => {
         console.error("Cache operation failed:", error);
-        return fetch(event.request); // Fallback to network if cache fails
+        return fetch(event.request);
       })
   );
 });
