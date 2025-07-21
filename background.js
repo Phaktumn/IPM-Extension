@@ -68,3 +68,25 @@ const openTab = (url, baseTab, callback = () => { }) => {
 		index: baseTab.index + 1,
 	}, callback);
 };
+
+
+// background.js (Service Worker)
+self.addEventListener('fetch', (event) => {
+  event.respondWith(
+    caches.open('my-cache').then((cache) => {
+      return cache.match(event.request).then((response) => {
+        if (response) {
+          return response; // Return the cached response if available
+        }
+        return fetch(event.request).then((networkResponse) => {
+          cache.put(event.request, networkResponse.clone()); // Cache the network response
+          return networkResponse;
+        });
+      });
+    }).catch((error) => {
+      console.error('Cache operation failed:', error);
+      return fetch(event.request); // Fallback to network if cache fails
+    })
+  );
+});
+

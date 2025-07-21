@@ -126,3 +126,22 @@ if (!currentUrl.includes('ipm.macwin.pt'))
     }
   });
 }
+
+const el1 = document.querySelector('#select_team_container > .ui-multiselect');
+if (el1) {
+  el1.style.setProperty('min-width', '210px', 'important');
+  el1.style.setProperty('margin-top', '3px', 'important');
+}
+
+const el2 = document.querySelector("#my_tasks > div:nth-child(8)");
+if (el2) {
+  el2.style.setProperty('margin-bottom', '20px', 'important');
+}
+
+
+document.querySelectorAll("#formSearch > fieldset > dl > div").forEach(div => {
+  div.style.flexDirection = "row";
+});
+
+
+
