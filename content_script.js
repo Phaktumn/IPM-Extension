@@ -726,6 +726,29 @@ function replaceImgByIconBySrc(imgSrc, iconName) {
     icon.setAttribute("aria-label", img.alt || iconName);
     icon.textContent = iconName;
 
+    const eventHandlers = [
+      "onmouseover",
+      "onmouseout",
+      "onclick",
+      "ondblclick",
+      "oncontextmenu",
+      "onmousedown",
+      "onmouseup",
+      "onmousemove",
+      "onmouseleave",
+      "onmouseenter",
+      "onfocus",
+      "onblur",
+      "onkeydown",
+      "onkeyup",
+    ];
+
+    eventHandlers.forEach((handler) => {
+      if (img[handler]) {
+        icon[handler] = img[handler];
+      }
+    });
+
     icon.style.color = "#3B4758";
     icon.style.fontSize = "20px";
     icon.style.verticalAlign = "middle";
@@ -895,13 +918,6 @@ for (let i = 1; i <= 15; i++) {
     el.classList.add("custom-select2-results");
   }
 }
-
-document
-  .querySelectorAll("#conversations-body > tr > td:nth-child(1) > span")
-  .forEach((span) => {
-    span.setAttribute("aria-describedby", "ui-tooltip-9");
-  });
-console.log("aria-describedby adicionado em todos spans da primeira coluna");
 
 document.addEventListener("DOMContentLoaded", () => {
   const ids = [
