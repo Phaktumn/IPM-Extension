@@ -680,126 +680,6 @@ document.querySelectorAll("table.tbl_tasks td.t_type").forEach((td) => {
   }
 });
 
-function replaceImgByIcon(titleText, iconName) {
-  const imgs = document.querySelectorAll(`img[title="${titleText}"]`);
-  imgs.forEach((img) => {
-    const icon = document.createElement("span");
-    icon.className =
-      "material-symbols-outlined icon-alinhado-com-header-menu-link";
-    icon.title = img.title;
-    icon.setAttribute("aria-label", img.alt || titleText);
-    icon.textContent = iconName;
-    icon.style.color = "#3B4758";
-    icon.style.fontSize = "24px";
-    icon.style.verticalAlign = "middle";
-    icon.style.lineHeight = "1";
-    img.parentNode.replaceChild(icon, img);
-  });
-}
-
-function replaceImgByIconByClass(imgClass, iconName) {
-  const imgs = document.querySelectorAll(`img.${imgClass}`);
-  imgs.forEach((img) => {
-    const icon = document.createElement("span");
-    icon.className =
-      "material-symbols-outlined icon-alinhado-com-header-menu-link";
-    icon.title = img.title || iconName;
-    icon.setAttribute("aria-label", img.alt || iconName);
-    icon.textContent = iconName;
-
-    icon.style.color = "#3B4758";
-    icon.style.fontSize = "18px";
-    icon.style.verticalAlign = "middle";
-    icon.style.lineHeight = "1";
-
-    img.parentNode.replaceChild(icon, img);
-  });
-}
-
-function replaceImgByIconBySrc(imgSrc, iconName) {
-  const imgs = document.querySelectorAll(`img[src="${imgSrc}"]`);
-  imgs.forEach((img) => {
-    const icon = document.createElement("span");
-    icon.className =
-      "material-symbols-outlined icon-alinhado-com-header-menu-link";
-    icon.title = img.title || iconName;
-    icon.setAttribute("aria-label", img.alt || iconName);
-    icon.textContent = iconName;
-
-    const eventHandlers = [
-      "onmouseover",
-      "onmouseout",
-      "onclick",
-      "ondblclick",
-      "oncontextmenu",
-      "onmousedown",
-      "onmouseup",
-      "onmousemove",
-      "onmouseleave",
-      "onmouseenter",
-      "onfocus",
-      "onblur",
-      "onkeydown",
-      "onkeyup",
-    ];
-
-    eventHandlers.forEach((handler) => {
-      if (img[handler]) {
-        icon[handler] = img[handler];
-      }
-    });
-
-    icon.style.color = "#3B4758";
-    icon.style.fontSize = "20px";
-    icon.style.verticalAlign = "middle";
-    icon.style.lineHeight = "1";
-
-    img.parentNode.replaceChild(icon, img);
-
-    const btn = icon.closest('button[type="submit"]');
-    if (btn) {
-      btn.style.display = "flex";
-      btn.style.alignItems = "center";
-      btn.style.gap = "6px";
-    }
-  });
-}
-
-const progressImg = document.querySelector("#progress img");
-if (progressImg) {
-  progressImg.classList.add("progress-icon");
-  replaceImgByIconByClass("progress-icon", "update");
-}
-
-replaceImgByIconByClass("title_info", "info");
-replaceImgByIcon("Editar", "edit");
-replaceImgByIcon("Add", "add");
-replaceImgByIcon("Editar atalho", "edit_document");
-replaceImgByIcon("Adicionar atalho", "bookmark_add");
-replaceImgByIcon("Update progress", "update");
-replaceImgByIconBySrc("/images/table_refresh.png", "change_circle");
-replaceImgByIconBySrc("/images/time_go.png", "update");
-replaceImgByIconBySrc("/images/star-on.png", "star");
-replaceImgByIconBySrc("/images/validation.png", "check");
-replaceImgByIconBySrc("/images/tick.png", "done_all");
-replaceImgByIconBySrc("/images/progress.png", "task_alt");
-replaceImgByIconBySrc("/images/pencil_go.png", "file_copy");
-replaceImgByIconBySrc("/images/pencil.png", "edit");
-replaceImgByIconBySrc("/images/email_add.png", "mail");
-replaceImgByIconBySrc("/images/email.png", "mail");
-replaceImgByIconBySrc("/images/note.png", "add_notes");
-replaceImgByIconBySrc("/images/time.png", "schedule");
-replaceImgByIconBySrc("/images/magnifier.png", "search");
-replaceImgByIconBySrc("/images/pencil_add.png", "add_task");
-replaceImgByIconBySrc("/images/time_sm.png", "schedule");
-replaceImgByIconBySrc("/images/attach_sm.png", "attach_file");
-replaceImgByIconBySrc("/images/hier.png", "device_hub");
-replaceImgByIconBySrc("/images/note10x10_gray.png", "add_comment");
-replaceImgByIconBySrc("/images/attach.png", "attach_file");
-replaceImgByIconBySrc("/images/note10x10_gray.png", "add_comment");
-replaceImgByIconBySrc("/images/pencil.png", "edit");
-replaceImgByIconBySrc("/images/bin_closed.png", "delete");
-
 const btn1 = document.getElementById("progress");
 const btn2 = document.getElementById("cleanFilters");
 
@@ -962,8 +842,12 @@ window.onload = () => {
   let currentMatchIndex = -1;
   let lastSearchTerm = "";
   const highlightColor = "#fff8e1";
-  const activeHighlightColor = "#ffc107"; // A more prominent color for the active match
+  const activeHighlightColor = "#ffc107";
 
+  // Foi preciso adicionar o evento de keydown para o inputFiltro
+  // o que estava a acontecer é que o evento era chamado a todos os inputs
+  // a cada input fazia focus no inputFiltro e o scroll voltava para o topo
+  // mais do que isso depois ia procurar elementos em dialogs que estavam ocultos
   inputFiltro.addEventListener("keydown", (event) => {
     if (event.key !== "Enter") return;
     event.preventDefault();
@@ -975,9 +859,10 @@ window.onload = () => {
       allMatches = [];
       currentMatchIndex = -1;
 
-      // Get oppen popup
+      // Dialog aberto
+      // O IPM tem todos os dialogs no documento mas estão ocultos.
+      // Precisamos encontrar o dialog que está visível.
       const dialogs = document.querySelectorAll("div.ui-dialog");
-      //Select the popup that is currently open
       if (dialogs.length === 0) return;
       const popup = Array.from(dialogs).find((p) => {
         return p.style.display === "flex" || p.style.display === "block";
@@ -988,7 +873,7 @@ window.onload = () => {
         return;
       }
 
-      // Clear highlights and find all matches.
+      // Limpar os destaques anteriores
       openTable.querySelectorAll("td").forEach((td) => {
         const cellText = td.textContent.toLowerCase();
         const isExcluded = td.parentElement.classList.contains("hide-content");
@@ -1025,23 +910,23 @@ window.onload = () => {
         const containerRect = container.getBoundingClientRect();
         const elementRect = element.getBoundingClientRect();
 
-        // The element's position relative to the top of the entire scrollable content
+        // Calcular a posição do elemento em relação ao container
         const elementTopInScrollContent =
           container.scrollTop + (elementRect.top - containerRect.top);
 
-        // The space available above and below the element
         const spaceAbove = elementTopInScrollContent;
         const spaceBelow =
           container.scrollHeight -
           (elementTopInScrollContent + element.clientHeight);
 
-        // The space needed on either side to perfectly center the element
         const spaceNeededForCenter =
           (container.clientHeight - element.clientHeight) / 2;
 
-        // If there's enough space, manually calculate the scroll for perfect centering.
-        // Otherwise, fall back to the browser's native `scrollIntoView`, which handles
-        // edge cases (like being at the very top or bottom) more gracefully.
+        // Isto é para os edge cases onde o elemento está muito perto do topo ou do fundo
+        // De novo o IPM precisa destas coisas
+
+        // O scrollTo faz scroll para o valor em pixels
+        // O scrollIntoView faz scroll para o elemento
         if (
           spaceAbove >= spaceNeededForCenter &&
           spaceBelow >= spaceNeededForCenter
