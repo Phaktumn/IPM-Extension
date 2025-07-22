@@ -235,9 +235,9 @@
   --datepicker-selected-border-color: #737373;
   --datepicker-selected-bg-color:#000000;
   
-
   --profile-avatar-bg: #fff187;
   --profile-avatar-color: #8e1b99;
+  --profile-avatar-border: #000000;
 }
 .icon,
 [class*="material-icons"],
@@ -1083,12 +1083,11 @@ body > header > section:nth-child(3) {
   font-family: var(--global-font-family);
   font-size: 15px;
   color: var(--profile-avatar-color);
-  /*
   text-shadow:
-    -1px -1px 0 black,
-    1px -1px 0 black,
-    -1px 1px 0 black,
-    1px 1px 0 black;*/
+    -1px -1px 0 var(--profile-avatar-border),
+    1px -1px 0 var(--profile-avatar-border),
+    -1px 1px 0 var(--profile-avatar-border),
+    1px 1px 0 var(--profile-avatar-border) !important;
   border-radius: var(--border-radius) !important;
   width: 32px;
   height: 32px;

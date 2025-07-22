@@ -16,6 +16,7 @@ const options = {
   profile: {
     avatarBg: "#fff187",
     avatarColor: "#751866",
+    avatarBorder: "#000000",
   },
 };
 
@@ -68,17 +69,24 @@ chrome.storage.local.get("options").then((r) => {
     elements.datepicker.selectedbordercolor.setAttribute(
       "value",
       options.datepicker.selectedbordercolor
+        ? options.datepicker.selectedbordercolor
+        : "#737373"
     );
     elements.datepicker.selectedbgcolor.setAttribute(
       "value",
       options.datepicker.selectedbgcolor
+        ? options.datepicker.selectedbgcolor
+        : "#f7f7f7"
     );
 
-    // With these:
     elements.profile.avatarBg.setAttribute("value", options.profile.avatarBg);
     elements.profile.avatarColor.setAttribute(
       "value",
-      options.profile.avatarColor
+      options.profile.avatarColor ? options.profile.avatarColor : "#751866"
+    );
+    elements.profile.avatarBorder.setAttribute(
+      "value",
+      options.profile.avatarBorder ? options.profile.avatarBorder : "#000000"
     );
   } catch (error) {
     console.log(error);
@@ -105,6 +113,7 @@ function getElements() {
     profile: {
       avatarBg: document.getElementById("avatarBg"),
       avatarColor: document.getElementById("avatarColor"),
+      avatarBorder: document.getElementById("avatarBorder"),
     },
   };
 }
@@ -154,6 +163,16 @@ function setListeners() {
 
   elements.profile.avatarColor.addEventListener("change", (event) => {
     options.profile.avatarColor = event.target.value;
+    saveSettings();
+  });
+
+  elements.profile.avatarBorder.addEventListener("change", (event) => {
+    options.profile.avatarBorder = event.target.value;
+    saveSettings();
+  });
+
+  elements.datepicker.selectedbgcolor.addEventListener("change", (event) => {
+    options.datepicker.selectedbgcolor = event.target.value;
     saveSettings();
   });
 

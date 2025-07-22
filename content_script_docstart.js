@@ -55,5 +55,9 @@ chrome.storage.local.get("options").then((res) => {
       "--profile-avatar-color",
       res.options.profile.avatarColor
     );
+    document.documentElement.style.setProperty(
+      "--profile-avatar-border",
+      res.options.profile.avatarBorder
+    );
   } catch (error) {}
 });
