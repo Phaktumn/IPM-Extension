@@ -17,6 +17,7 @@ chrome.storage.local.get("options").then((res) => {
       "--tab-bottom-color-inactive",
       res.options.tabs.inactivebottomcolor
     );
+
     document.documentElement.style.setProperty(
       "--datepicker-today-bg-color",
       res.options.datepicker.todaybgcolor
@@ -44,6 +45,15 @@ chrome.storage.local.get("options").then((res) => {
     document.documentElement.style.setProperty(
       "--datepicker-selected-bg-color",
       res.options.datepicker.selectedbgcolor
+    );
+
+    document.documentElement.style.setProperty(
+      "--profile-avatar-bg",
+      res.options.profile.avatarBg
+    );
+    document.documentElement.style.setProperty(
+      "--profile-avatar-color",
+      res.options.profile.avatarColor
     );
   } catch (error) {}
 });

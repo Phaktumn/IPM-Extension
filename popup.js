@@ -1,8 +1,5 @@
 const options = {
   fileCheck: "false",
-  headercolor: "#ff0000", // Default for table header
-  footercolor: "#ff0000", // Default for table footer
-  tablebordercolor: "#ff0000", // Default for table border
   tabs: {
     activebottomcolor: "#ffffff",
     inactivebottomcolor: "#ffffff",
@@ -16,10 +13,15 @@ const options = {
     selectedbordercolor: "#737373",
     selectedbgcolor: "#f7f7f7",
   },
+  profile: {
+    avatarBg: "#fff187",
+    avatarColor: "#751866",
+  },
 };
 
 chrome.storage.local.get("options").then((r) => {
   try {
+    console.log("Options loaded", r.options);
     if (r.options === undefined) {
       chrome.storage.local.set({ options }).then(() => {
         console.log("Value was null and was set");
@@ -35,14 +37,9 @@ chrome.storage.local.get("options").then((r) => {
       });
     };
 
-    elements.clientFileCheck.checked = options.fileCheck === "true";
-
-    // Populate table color pickers
-    elements.header.setAttribute("value", options.headercolor);
-    elements.footer.setAttribute("value", options.footercolor);
-    elements.border.setAttribute("value", options.tablebordercolor);
-
-    // Populate tab color pickers
+    if (options.fileCheck === "true") {
+      elements.clientFileCheck.setAttribute("checked", "");
+    }
     elements.tabs.active.setAttribute("value", options.tabs.activebottomcolor);
     elements.tabs.inactive.setAttribute(
       "value",
@@ -76,6 +73,13 @@ chrome.storage.local.get("options").then((r) => {
       "value",
       options.datepicker.selectedbgcolor
     );
+
+    // With these:
+    elements.profile.avatarBg.setAttribute("value", options.profile.avatarBg);
+    elements.profile.avatarColor.setAttribute(
+      "value",
+      options.profile.avatarColor
+    );
   } catch (error) {
     console.log(error);
   }
@@ -84,9 +88,7 @@ chrome.storage.local.get("options").then((r) => {
 function getElements() {
   return {
     clientFileCheck: document.getElementById("openClientConfigsFile"),
-    header: document.getElementById("headerclr"),
-    footer: document.getElementById("footerclr"),
-    border: document.getElementById("tborderclr"),
+
     tabs: {
       active: document.getElementById("tabBtmClr"),
       inactive: document.getElementById("tabInactiveBtmClr"),
@@ -100,25 +102,15 @@ function getElements() {
       selectedbordercolor: document.getElementById("dpselectedborder"),
       selectedbgcolor: document.getElementById("dpselectedbg"),
     },
+    profile: {
+      avatarBg: document.getElementById("avatarBg"),
+      avatarColor: document.getElementById("avatarColor"),
+    },
   };
 }
 
 function setListeners() {
   const elements = getElements();
-  elements.header.addEventListener("change", (event) => {
-    options.headercolor = event.target.value;
-    saveSettings();
-  });
-
-  elements.footer.addEventListener("change", (event) => {
-    options.footercolor = event.target.value;
-    saveSettings();
-  });
-
-  elements.border.addEventListener("change", (event) => {
-    options.tablebordercolor = event.target.value;
-    saveSettings();
-  });
 
   elements.tabs.active.addEventListener("change", (event) => {
     options.tabs.activebottomcolor = event.target.value;
@@ -155,6 +147,16 @@ function setListeners() {
     saveSettings();
   });
 
+  elements.profile.avatarBg.addEventListener("change", (event) => {
+    options.profile.avatarBg = event.target.value;
+    saveSettings();
+  });
+
+  elements.profile.avatarColor.addEventListener("change", (event) => {
+    options.profile.avatarColor = event.target.value;
+    saveSettings();
+  });
+
   elements.datepicker.selectedbordercolor.addEventListener(
     "change",
     (event) => {
@@ -162,11 +164,6 @@ function setListeners() {
       saveSettings();
     }
   );
-
-  elements.datepicker.selectedbgcolor.addEventListener("change", (event) => {
-    options.datepicker.selectedbgcolor = event.target.value;
-    saveSettings();
-  });
 
   elements.clientFileCheck.addEventListener("click", (event) => {
     options.fileCheck = options.fileCheck === "false" ? "true" : "false";

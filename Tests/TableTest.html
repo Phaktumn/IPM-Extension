@@ -5,162 +5,247 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Task Table</title>
+    <!-- Minimal Flexbox CSS -->
     <style>
-        body {
-            font-family: Arial, sans-serif;
-            margin: 20px;
+        .form-flex {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 24px;
+            max-width: 900px;
         }
 
-        table {
+        .form-group {
+            display: flex;
+            flex-direction: column;
+            flex: 1 1 350px;
+            min-width: 220px;
+            margin-bottom: 12px;
+        }
+
+        .form-row {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 16px;
             width: 100%;
-            border-collapse: collapse;
-            margin-bottom: 20px;
         }
 
-        th,
-        td {
-            border: 1px solid #ccc;
-            padding: 8px;
-            text-align: left;
-        }
-
-        th {
-            background-color: #f4f4f4;
-        }
-
-        input[type="text"] {
+        .form-actions {
+            margin-top: 20px;
             width: 100%;
-            box-sizing: border-box;
+            display: flex;
+            justify-content: flex-end;
         }
 
-        .section {
-            font-size: 1.2em;
-            font-weight: bold;
-            background-color: #e8e8e8;
+        button[type="submit"] {
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            background: #3B4758;
+            color: white;
+            border: none;
+            border-radius: 6px;
+            padding: 8px 20px;
+            font-size: 1.1rem;
             cursor: pointer;
-            padding: 10px;
+            transition: background .18s;
         }
 
-        .hidden {
-            display: none;
+        button[type="submit"]:hover {
+            background: #283142;
+        }
+
+        label {
+            font-weight: 500;
+            margin-bottom: 4px;
+        }
+
+        .field_tip {
+            color: #666;
+            font-size: 0.95em;
+            margin-top: 4px;
+        }
+
+        fieldset {
+            border-radius: 8px;
+            border: 1px solid #bbb;
+            padding: 28px 30px;
+            background: #f9fafd;
+            max-width: 1000px;
+            margin: auto;
+        }
+
+        legend {
+            font-size: 1.2em;
+            font-weight: 700;
+            margin-bottom: 16px;
         }
     </style>
 </head>
 
 <body>
-    <h1>Task Management Table</h1>
+    <form id="task" action="/insert.html" method="post" enctype="multipart/form-data">
+        <fieldset>
+            <legend>Nova Tarefa</legend>
+            <div class="form-flex">
 
-    <div id="task-table"></div>
+                <!-- Project -->
+                <div class="form-group">
+                    <label for="projectId">Projeto:</label>
+                    <select id="projectId" name="projectId" disabled>
+                        <!-- [Insert your options here as needed] -->
+                        <option value="59666">0.1. - Product Backlog - Conversões Omnis (8/11)</option>
+                        <!-- ... -->
+                    </select>
+                </div>
 
-    <script>
-        // JSON Data
-        const data = {
-            "Por Planear": [
-                {
-                    "id": "1578125",
-                    "creator": "Daniel Cunha",
-                    "userActual": "Jorge Paiva",
-                    "responsible": "Daniel Cunha",
-                    "priority": "3",
-                    "project": "0.1. - Product Backlog - GM WEB - Controladores",
-                    "title": "Envio de email",
-                    "taskType": "new func",
-                    "dateInserted": "2021-11-27",
-                    "taskState": "Por Planear"
-                },
-                // More tasks...
-            ],
-            "Curso": [
-                {
-                    "id": "1570288",
-                    "creator": "Thiago Vieira",
-                    "userActual": "Jorge Paiva",
-                    "responsible": "Jorge Paiva",
-                    "priority": "3",
-                    "project": "0.1. - Product Backlog - GM WEB - Controladores",
-                    "title": "Front-end do módulo Controladores (blazor)",
-                    "taskType": "new func",
-                    "dateInserted": "2020-01-17",
-                    "taskState": "Curso"
-                },
-                // More tasks...
-            ]
-        };
+                <!-- Manager -->
+                <div class="form-group">
+                    <label for="managerId">Responsável:</label>
+                    <select id="managerId" name="managerId" disabled>
+                        <option value="">Selecione uma opção</option>
+                        <option value="344">Alexandre Gonçalves</option>
+                        <!-- ... -->
+                    </select>
+                </div>
 
-        // Generate the table
-        const generateTable = (data) => {
-            const container = document.getElementById('task-table');
-            container.innerHTML = '';
+                <!-- Current User -->
+                <div class="form-group">
+                    <label for="currentUserId">Utilizador atual:</label>
+                    <select id="currentUserId" name="currentUserId" disabled>
+                        <option value="">Selecione uma opção</option>
+                        <option value="344">Alexandre Gonçalves</option>
+                        <!-- ... -->
+                    </select>
+                </div>
 
-            Object.keys(data).forEach(section => {
-                // Section Header
-                const sectionHeader = document.createElement('div');
-                sectionHeader.textContent = section;
-                sectionHeader.className = 'section';
-                sectionHeader.addEventListener('click', () => {
-                    const table = sectionHeader.nextElementSibling;
-                    table.classList.toggle('hidden');
-                });
-                container.appendChild(sectionHeader);
+                <!-- CC Users (Display only) -->
+                <div class="form-group">
+                    <label>Utilizadores CC:</label>
+                    <div id="task_creation_team">&nbsp;</div>
+                </div>
 
-                // Table
-                const table = document.createElement('table');
-                table.classList.add('hidden');
-                const thead = document.createElement('thead');
-                const tbody = document.createElement('tbody');
+                <!-- Task Type -->
+                <div class="form-group">
+                    <label for="typeId">Tipo de tarefa:</label>
+                    <select id="typeId" name="typeId" disabled>
+                        <option value="8320">Assistência</option>
+                        <!-- ... -->
+                    </select>
+                </div>
 
-                // Columns
-                const columns = ["ID", "Creator", "User", "Responsible", "Priority", "Project", "Title", "Task Type", "Date Inserted", "State"];
-                const tr = document.createElement('tr');
+                <!-- State -->
+                <div class="form-group">
+                    <label for="stateId">Estado inicial:</label>
+                    <select id="stateId" name="stateId" disabled>
+                        <option value="37238">00 Por Planear</option>
+                        <!-- ... -->
+                    </select>
+                </div>
 
-                columns.forEach(col => {
-                    const th = document.createElement('th');
-                    th.textContent = col;
+                <!-- Requested By -->
+                <div class="form-group">
+                    <label for="requestedById">Criado por:</label>
+                    <select id="requestedById" name="requestedById" disabled>
+                        <option value="476">Mónica Lima</option>
+                        <!-- ... -->
+                    </select>
+                </div>
 
-                    // Add filter input
-                    const input = document.createElement('input');
-                    input.type = 'text';
-                    input.placeholder = `Filter ${col}`;
-                    input.addEventListener('input', (e) => filterTable(e, tbody, columns.indexOf(col)));
+                <!-- Options 1-4 -->
+                <div class="form-group">
+                    <label for="option1">Opção 1:</label>
+                    <select id="option1" name="option1">
+                        <option value="0">Selecione uma opção</option>
+                        <!-- ... -->
+                    </select>
+                </div>
+                <!-- Hide these if not needed, just as in your original code -->
+                <div class="form-group" style="display:none;">
+                    <label for="option2">Opção 2:</label>
+                    <select id="option2" name="option2">
+                        <option value="0">Selecione uma opção</option>
+                    </select>
+                </div>
+                <div class="form-group" style="display:none;">
+                    <label for="option3">Opção 3:</label>
+                    <select id="option3" name="option3">
+                        <option value="0">Selecione uma opção</option>
+                    </select>
+                </div>
+                <div class="form-group" style="display:none;">
+                    <label for="option4">Opção 4:</label>
+                    <select id="option4" name="option4">
+                        <option value="0">Selecione uma opção</option>
+                    </select>
+                </div>
 
-                    th.appendChild(input);
-                    tr.appendChild(th);
-                });
+                <!-- Priority -->
+                <div class="form-group">
+                    <label for="priorityId">Urgência:</label>
+                    <select id="priorityId" name="priorityId">
+                        <option value="1">Critical Impact / System Down</option>
+                        <option value="2">Significant Impact</option>
+                        <option value="3">Normal Impact</option>
+                        <option value="4">Low/Informational</option>
+                        <option value="5">N.a.</option>
+                    </select>
+                </div>
 
-                thead.appendChild(tr);
-                table.appendChild(thead);
+                <!-- Dates Row -->
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="scheduledDateStart">Data prevista início:</label>
+                        <input id="scheduledDateStart" name="scheduledDateStart" type="text" size="9">
+                    </div>
+                    <div class="form-group">
+                        <label for="dateStart">Data início:</label>
+                        <input id="dateStart" name="dateStart" type="text" size="9">
+                    </div>
+                    <div class="form-group">
+                        <label for="scheduledDateEnd">Data prevista fim:</label>
+                        <input id="scheduledDateEnd" name="scheduledDateEnd" type="text" size="9">
+                    </div>
+                    <div class="form-group">
+                        <label for="dateEnd">Data fim:</label>
+                        <input id="dateEnd" name="dateEnd" type="text" size="9">
+                    </div>
+                </div>
 
-                // Rows
-                data[section].forEach(task => {
-                    const row = document.createElement('tr');
-                    row.dataset.id = task.id;
+                <!-- Title -->
+                <div class="form-group">
+                    <label for="title">Título:</label>
+                    <input id="title" name="title" type="text" style="width:100%;">
+                </div>
 
-                    columns.forEach(key => {
-                        const td = document.createElement('td');
-                        td.textContent = task[key.toLowerCase()] || task[key.replace(/ /g, "").toLowerCase()];
-                        row.appendChild(td);
-                    });
+                <!-- Details -->
+                <div class="form-group">
+                    <label for="detail">Detalhes:</label>
+                    <textarea id="detail" name="detail" rows="5" style="width:100%;"></textarea>
+                </div>
 
-                    tbody.appendChild(row);
-                });
+                <!-- Attachments -->
+                <div class="form-group">
+                    <label for="attachments">Anexos:</label>
+                    <input id="attachments0.attachments.attachments" name="attachments[0].attachments.attachments"
+                        type="file" multiple>
+                    <span class="field_tip">Pode selecionar vários anexos</span>
+                </div>
 
-                table.appendChild(tbody);
-                container.appendChild(table);
-            });
-        };
+                <!-- Hidden Fields -->
+                <input id="teamIds" name="teamIds" type="hidden" value="">
+                <input id="parentId" name="parentId" type="hidden" value="">
+                <input id="attachments0.typeId" name="attachments[0].typeId" value="1" type="hidden">
 
-        // Filter functionality
-        const filterTable = (event, tbody, colIndex) => {
-            const filterValue = event.target.value.toLowerCase();
-            Array.from(tbody.rows).forEach(row => {
-                const cellValue = row.cells[colIndex]?.textContent.toLowerCase() || '';
-                row.style.display = cellValue.includes(filterValue) ? '' : 'none';
-            });
-        };
+                <!-- Submit -->
+                <div class="form-actions">
+                    <button id="add-task" type="submit" title="Submeter">
+                        <span>➕</span> <span>Submeter</span>
+                    </button>
+                </div>
+            </div>
+        </fieldset>
+    </form>
 
-        // Initialize the table
-        generateTable(data);
-    </script>
 </body>
 
 </html>

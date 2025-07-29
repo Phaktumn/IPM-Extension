@@ -9,6 +9,9 @@ const pages = [
   { url: `task_communication.html`, handler: processTasksPage },
   { url: "tasks.html", handler: processTasksPage },
   { url: "week_progress.html", handler: processWeekProgress },
+  { url: "task/hierarchy.html", handler: processTaskHierarchy },
+  { url: "project.html", handler: processProjectPage },
+  { url: "insert.html", handler: processInsertPage },
 ];
 
 pages.forEach(({ url, handler }) => {
@@ -20,7 +23,6 @@ pages.forEach(({ url, handler }) => {
     }
   }
 });
-
 /**
  * Reestruturar o HEADER
  *
@@ -98,12 +100,6 @@ document.querySelectorAll("#tbl_weekly").forEach((table) => {
   }
 });
 
-/**
- * Percorre as linhas do rodapé de tabelas com o ID `tbl_weekly` e a classe `tbl_time`.
- * Para cada uma das primeiras 6 células (colunas) de cada linha, verifica se o conteúdo
- * textual da célula é um horário no formato HH:MM. Se for um horário válido e inferior
- * a 7 horas (420 minutos), adiciona a classe `highlight-time` à célula.
- */
 function aplicarCorNasCelulas() {
   const linhas = document.querySelectorAll("#tbl_weekly.tbl_time > tfoot > tr");
 
@@ -114,15 +110,13 @@ function aplicarCorNasCelulas() {
       const td = celulas[i];
       const textoOriginal = td.textContent.trim();
 
-      // Verifica se o conteúdo está no formato HH:MM
       const match = textoOriginal.match(/^(\d{1,2}):(\d{2})$/);
-      if (!match) continue; // Se não for um horário válido, não faz nada.
+      if (!match) continue;
 
       const horas = parseInt(match[1], 10);
       const minutos = parseInt(match[2], 10);
-      const total = horas * 60 + minutos; // Converte para minutos totais.
+      const total = horas * 60 + minutos;
 
-      // Se o total de minutos for menor que 420 (7 horas), adiciona a classe
       if (total < 420) {
         td.classList.add("highlight-time");
       }
@@ -136,15 +130,6 @@ if (document.readyState === "loading") {
   aplicarCorNasCelulas();
 }
 
-/**
- * Percorre as tabelas com o ID `tbl_weekly` e a classe `tbl_time`.
- * Para cada tabela, itera sobre as linhas do seu corpo (`tbody`).
- * Se uma linha tiver pelo menos 11 células (`td`), aplica um estilo específico à 10ª e 11ª células:
- * - Define a cor de fundo para `#ced4da80`.
- * - Define a opacidade para `0.4`.
- * Adicionalmente, aplica um `border-radius` ao canto superior direito da 11ª célula da primeira linha
- * e ao canto inferior direito da 11ª célula da última linha do corpo da tabela.
- */
 function aplicarCorNasColunas() {
   const tabelas = document.querySelectorAll("#tbl_weekly.tbl_time");
 
@@ -183,9 +168,6 @@ if (document.readyState === "loading") {
   aplicarCorNasColunas();
 }
 
-/**
- * Qualquer tipo de alteração na DOM o observer vai chamar a função aplicarCorNasCelulas()
- */
 const observer = new MutationObserver(() => aplicarCorNasCelulas());
 observer.observe(document.body, { childList: true, subtree: true });
 
@@ -233,6 +215,7 @@ function processClientsPage() {
 }
 
 function processWeekProgress() {
+  const main = document.querySelector("#main");
   const prevElement = document.querySelector("#table-configure-columns");
 
   document.querySelector("#main > h2").remove();
@@ -359,16 +342,14 @@ function processWeekProgress() {
   );
 
   function moveWeek(moveAmount) {
-    // Calculate new week value
     let newWeekValue = selectedWeek + moveAmount;
     let newYearValue = selectedYear;
 
-    // Handle year boundary crossing
     if (newWeekValue <= 0) {
-      newWeekValue = 52 + newWeekValue; // If negative, wrap around from the end of previous year
+      newWeekValue = 52 + newWeekValue;
       newYearValue = selectedYear - 1;
     } else if (newWeekValue > 52) {
-      newWeekValue = newWeekValue - 52; // If exceeds 52, wrap around to the start of next year
+      newWeekValue = newWeekValue - 52;
       newYearValue = selectedYear + 1;
     }
 
@@ -378,10 +359,10 @@ function processWeekProgress() {
     }).click();
   }
 
-  document.querySelector("#prevweek").addEventListener("click", () => {
+  document.querySelector("#prevweek").addEventListener("click", (e) => {
     moveWeek(-1);
   });
-  document.querySelector("#nextweek").addEventListener("click", () => {
+  document.querySelector("#nextweek").addEventListener("click", (e) => {
     moveWeek(1);
   });
 
@@ -432,13 +413,13 @@ document.addEventListener("DOMContentLoaded", function () {
   let projectDiv = document.getElementById("s2id_project1");
 
   if (clientDiv) {
-    clientDiv.style.width = "100px"; // Change width
-    clientDiv.classList.add("updated-client"); // Add new class
+    clientDiv.style.width = "100px";
+    clientDiv.classList.add("updated-client");
   }
 
   if (projectDiv) {
-    projectDiv.style.width = "270px"; // Change width
-    projectDiv.classList.add("updated-project"); // Add new class
+    projectDiv.style.width = "270px";
+    projectDiv.classList.add("updated-project");
   }
 });
 
@@ -478,11 +459,6 @@ function processTaskDashboard() {
     return element.getAttribute(StateAttributeName) === OpenStateValue;
   }
 
-  /**
-   * Creates a button with a icon and label
-   * @param {*} text Label content
-   * @returns Button Element
-   */
   function createButton(text) {
     let button = document.createElement("button");
     button.className = "expand-button";
@@ -515,7 +491,6 @@ function processTaskDashboard() {
     }
   }
 
-  // Align elements
   {
     const colGroups = document.querySelectorAll("form > fieldset > dl > div");
     if (colGroups) {
@@ -543,7 +518,6 @@ function processTaskDashboard() {
         element.classList.add("task-dashboard-label");
       });
       checkBoxes[0].classList.remove("task-dashboard-label");
-      //Check "Somente favoritos:""
       checkBoxes[5].classList.add("w130label");
     }
 
@@ -553,6 +527,52 @@ function processTaskDashboard() {
       filterGroup[1].classList.add("pt-0");
     }
   }
+}
+
+function processTaskHierarchy() {
+  // Fix para header ???task.scheduled.date???
+  let headerTr = document.querySelector("#tbl_hierarchy > thead > tr");
+  var dateElement = headerTr.querySelector("th:nth-child(6)");
+  dateElement.innerHTML = "Data";
+
+  // Fix para adicionar um header e completar o header da tabela
+  headerTr.appendChild(createElement("th", {}, []));
+}
+
+function processProjectPage() {}
+
+function processInsertPage() {
+  /** create a wait timer */
+  setTimeout(() => {
+    // Add a new dt element to the task form
+    let dt = document.querySelector("#task > fieldset > dl");
+    if (dt === null) {
+      return;
+    }
+    let tituloElemDT = document.querySelector(
+      "#task > fieldset > dl > dt:nth-child(5)"
+    );
+    let detalhesElemDT = document.querySelector(
+      "#task > fieldset > dl > dd:nth-child(8)"
+    );
+    let anexopElemDt = document.querySelector(
+      "#task > fieldset > dl > dt:nth-child(9)"
+    );
+    let lastElemDt = document.querySelector(
+      "#task > fieldset > dl > dd:nth-child(11)"
+    );
+    let dtElem = document.createElement("dt");
+    dt.insertBefore(dtElem, tituloElemDT);
+
+    dtElem = document.createElement("dt");
+    dt.insertBefore(dtElem, detalhesElemDT);
+
+    dtElem = document.createElement("dt");
+    dt.insertBefore(dtElem, anexopElemDt);
+
+    dtElem = document.createElement("dt");
+    dt.insertBefore(dtElem, lastElemDt);
+  }, 100);
 }
 
 if (!window.alreadyExecuted) {
@@ -608,3 +628,365 @@ function reload() {
 }
 
 window.alreadyExecuted = true;
+
+document
+  .querySelectorAll("table#tbl_hierarchy td:nth-child(5)")
+  .forEach((td) => {
+    const texto = td.textContent.trim().toLowerCase();
+
+    if (texto === "assistência") {
+      td.classList.add("assistencia");
+    } else if (texto === "bug") {
+      td.classList.add("bug");
+    } else if (texto === "continuidade") {
+      td.classList.add("continuidade");
+    } else if (texto === "formação") {
+      td.classList.add("formacao");
+    } else if (texto === "implementação") {
+      td.classList.add("implementacao");
+    } else if (texto === "tech improv") {
+      td.classList.add("tech_improv");
+    } else if (texto === "tech improv om8") {
+      td.classList.add("melhoria_tecnica_om8");
+    } else if (texto === "new func") {
+      td.classList.add("new_func");
+    } else if (texto === "new func om8") {
+      td.classList.add("nova_funcao_om8");
+    } else if (texto === "outras nd") {
+      td.classList.add("outras_nao_debitar");
+    } else if (texto === "reuniões") {
+      td.classList.add("reunioes");
+    } else if (texto === "tarefa") {
+      td.classList.add("tarefa");
+    } else if (texto === "agr") {
+      td.classList.add("tarefa_agrupadora");
+    }
+  });
+
+document
+  .querySelectorAll("table#tbl_hierarchy td:nth-child(5)")
+  .forEach((td) => {
+    const texto = td.textContent.trim().toLowerCase();
+
+    if (texto === "assistência") {
+      td.classList.add("assistencia");
+    } else if (texto === "bug") {
+      td.classList.add("bug");
+    } else if (texto === "continuidade") {
+      td.classList.add("continuidade");
+    } else if (texto === "formação") {
+      td.classList.add("formacao");
+    } else if (texto === "implementação") {
+      td.classList.add("implementacao");
+    } else if (texto === "tech improv") {
+      td.classList.add("tech_improv");
+    } else if (texto === "tech improv om8") {
+      td.classList.add("melhoria_tecnica_om8");
+    } else if (texto === "new func") {
+      td.classList.add("new_func");
+    } else if (texto === "new func om8") {
+      td.classList.add("nova_funcao_om8");
+    } else if (texto === "outras nd") {
+      td.classList.add("outras_nao_debitar");
+    } else if (texto === "reuniões") {
+      td.classList.add("reunioes");
+    } else if (texto === "tarefa") {
+      td.classList.add("tarefa");
+    } else if (texto === "agr") {
+      td.classList.add("tarefa_agrupadora");
+    }
+  });
+
+document.querySelectorAll("table.tbl_tasks td.t_type").forEach((td) => {
+  const texto = td.textContent.trim().toLowerCase();
+
+  if (texto === "assistência") {
+    td.classList.add("assistencia");
+  } else if (texto === "bug") {
+    td.classList.add("bug");
+  } else if (texto === "continuidade") {
+    td.classList.add("continuidade");
+  } else if (texto === "formação") {
+    td.classList.add("formacao");
+  } else if (texto === "implementação") {
+    td.classList.add("implementacao");
+  } else if (texto === "tech improv") {
+    td.classList.add("tech_improv");
+  } else if (texto === "tech improv om8") {
+    td.classList.add("melhoria_tecnica_om8");
+  } else if (texto === "new func") {
+    td.classList.add("new_func");
+  } else if (texto === "new func om8") {
+    td.classList.add("nova_funcao_om8");
+  } else if (texto === "outras nd") {
+    td.classList.add("outras_nao_debitar");
+  } else if (texto === "reuniões") {
+    td.classList.add("reunioes");
+  } else if (texto === "tarefa") {
+    td.classList.add("tarefa");
+  } else if (texto === "agr") {
+    td.classList.add("tarefa_agrupadora");
+  }
+});
+
+const btn1 = document.getElementById("progress");
+const btn2 = document.getElementById("cleanFilters");
+
+if (btn1 && btn2) {
+  const container = document.createElement("div");
+  container.id = "button-container";
+  container.style.display = "flex";
+  container.style.gap = "10px";
+  container.style.alignItems = "center";
+
+  btn1.parentNode.insertBefore(container, btn1);
+
+  container.appendChild(btn1);
+  container.appendChild(btn2);
+}
+
+document.querySelectorAll("#progress, #cleanFilters").forEach((btn) => {
+  btn.classList.add("button-icon");
+  btn.removeAttribute("style");
+});
+
+const userSection = document.querySelector(
+  "body > header > section:nth-child(3)"
+);
+
+if (userSection) {
+  const avatar = document.createElement("div");
+  avatar.classList.add("user-avatar");
+  avatar.textContent = "ML";
+
+  const userLink = userSection.querySelector('a[href="/account/account.html"]');
+
+  if (userLink) {
+    const parent = userLink.parentNode;
+    parent.insertBefore(avatar, userLink);
+  } else {
+    userSection.appendChild(avatar);
+  }
+}
+
+const dts = document.querySelectorAll("dl dt");
+const filterInput = document.querySelector("input#filter");
+
+if (filterInput) {
+  dts.forEach((dt) => {
+    const label = dt.querySelector("label");
+    if (label && label.getAttribute("for") === "filter") {
+      dt.style.marginBottom = "5px";
+    }
+  });
+}
+
+const celulasTipo = document.querySelectorAll("table.tbl_tasks td.t_type");
+
+if (celulasTipo.length > 0) {
+  const primeira = celulasTipo[0];
+  primeira.style.borderTopLeftRadius = "3px";
+  primeira.style.borderTopRightRadius = "3px";
+
+  const ultima = celulasTipo[celulasTipo.length - 1];
+  ultima.style.borderBottomLeftRadius = "3px";
+  ultima.style.borderBottomRightRadius = "3px";
+}
+
+document.querySelectorAll("#save").forEach((btn) => {
+  if (btn.classList.contains("buttons_new_progress_update")) {
+    btn.id = "save-progress-update";
+  } else {
+    btn.id = "save-unique";
+  }
+});
+
+const saveBtn = document.querySelector("#save-progress-update");
+const cancelBtn = document.querySelector("#clear");
+
+if (saveBtn && cancelBtn) {
+  const wrapper = document.createElement("div");
+  wrapper.style.display = "flex";
+  wrapper.style.justifyContent = "flex-end";
+  wrapper.style.gap = "10px";
+  wrapper.style.marginBottom = "10px";
+
+  cancelBtn.parentNode.insertBefore(wrapper, cancelBtn);
+  wrapper.appendChild(saveBtn);
+  wrapper.appendChild(cancelBtn);
+}
+
+const dtElements = document.querySelectorAll("dt");
+
+dtElements.forEach((dt, index) => {
+  if (dt.textContent.trim() === "Detalhes") {
+    if (index + 1 < dtElements.length) {
+      dtElements[index + 1].id = "lbl_anexos";
+    }
+  }
+});
+
+const lblDetails = document.getElementById("lbl_details");
+const lblAnexos = document.getElementById("lbl_anexos");
+
+if (lblDetails && lblAnexos) {
+  const style = window.getComputedStyle(lblDetails);
+
+  lblAnexos.style.display = style.display;
+  lblAnexos.style.width = style.width;
+  lblAnexos.style.padding = style.padding;
+  lblAnexos.style.background = style.background;
+  lblAnexos.style.verticalAlign = style.verticalAlign;
+  lblAnexos.style.margin = "0";
+  lblAnexos.style.clear = "left";
+}
+
+for (let i = 1; i <= 15; i++) {
+  const el = document.getElementById(`select2-results-${i}`);
+  if (el) {
+    el.classList.add("custom-select2-results");
+  }
+}
+
+document.addEventListener("DOMContentLoaded", () => {
+  const ids = [
+    "#s2id_updateTaskList0\\.task\\.parentId",
+    "#updateTaskList0\\.task\\.typeId",
+    "#stateId_0",
+    "#s2id_updateTaskList0\\.task\\.currentUserId",
+    "#s2id_updateTaskList0\\.task\\.managerId",
+    "#forDate0",
+    "#hours0",
+    "#hours_other0",
+    "#timeCodeId0",
+  ];
+
+  ids.forEach((id) => {
+    const el = document.querySelector(id);
+    if (el) {
+      el.classList.add("input_new_update_progress", "select_task");
+    }
+  });
+});
+
+window.onload = () => {
+  const projectExtract = document.querySelector("#project-extract");
+  if (!projectExtract) return;
+
+  const table = projectExtract.querySelector("table");
+  if (!table) return;
+
+  const paiDaTabela = table.parentElement;
+
+  const inputFiltro = document.createElement("input");
+  inputFiltro.placeholder = "Filtrar e destacar...";
+  inputFiltro.style.marginBottom = "10px";
+  inputFiltro.style.display = "block";
+  inputFiltro.style.width = "200px";
+  inputFiltro.style.padding = "5px";
+
+  paiDaTabela.insertBefore(inputFiltro, table);
+
+  let allMatches = [];
+  let currentMatchIndex = -1;
+  let lastSearchTerm = "";
+  const highlightColor = "#fcecf4ff";
+  const activeHighlightColor = "#F7C9DA	";
+
+  // Foi preciso adicionar o evento de keydown para o inputFiltro
+  // o que estava a acontecer é que o evento era chamado a todos os inputs
+  // a cada input fazia focus no inputFiltro e o scroll voltava para o topo
+  // mais do que isso depois ia procurar elementos em dialogs que estavam ocultos
+  inputFiltro.addEventListener("keydown", (event) => {
+    if (event.key !== "Enter") return;
+    event.preventDefault();
+
+    const filtro = inputFiltro.value.trim().toLowerCase();
+
+    if (filtro !== lastSearchTerm) {
+      lastSearchTerm = filtro;
+      allMatches = [];
+      currentMatchIndex = -1;
+
+      // Dialog aberto
+      // O IPM tem todos os dialogs no documento mas estão ocultos.
+      // Precisamos encontrar o dialog que está visível.
+      const dialogs = document.querySelectorAll("div.ui-dialog");
+      if (dialogs.length === 0) return;
+      const popup = Array.from(dialogs).find((p) => {
+        return p.style.display === "flex" || p.style.display === "block";
+      });
+
+      let openTable = popup.querySelector("table.tbl_tasks.tbl_extracts");
+      if (openTable === null) {
+        return;
+      }
+
+      // Limpar os destaques anteriores
+      openTable.querySelectorAll("td").forEach((td) => {
+        const cellText = td.textContent.toLowerCase();
+        const isExcluded = td.parentElement.classList.contains("hide-content");
+
+        if (isExcluded) {
+          return;
+        }
+
+        if (filtro && cellText.includes(filtro)) {
+          td.style.backgroundColor = highlightColor;
+          allMatches.push(td);
+        } else {
+          td.style.backgroundColor = "";
+        }
+      });
+    }
+
+    if (allMatches.length === 0) return;
+
+    if (currentMatchIndex > -1) {
+      allMatches[currentMatchIndex].style.backgroundColor = highlightColor;
+    }
+
+    currentMatchIndex = (currentMatchIndex + 1) % allMatches.length;
+    const currentMatch = allMatches[currentMatchIndex];
+
+    currentMatch.style.backgroundColor = activeHighlightColor;
+
+    if (currentMatch) {
+      setTimeout(() => {
+        const container = projectExtract;
+        const element = currentMatch;
+
+        const containerRect = container.getBoundingClientRect();
+        const elementRect = element.getBoundingClientRect();
+
+        // Calcular a posição do elemento em relação ao container
+        const elementTopInScrollContent =
+          container.scrollTop + (elementRect.top - containerRect.top);
+
+        const spaceAbove = elementTopInScrollContent;
+        const spaceBelow =
+          container.scrollHeight -
+          (elementTopInScrollContent + element.clientHeight);
+
+        const spaceNeededForCenter =
+          (container.clientHeight - element.clientHeight) / 2;
+
+        // Isto é para os edge cases onde o elemento está muito perto do topo ou do fundo
+        // De novo o IPM precisa destas coisas
+
+        // O scrollTo faz scroll para o valor em pixels
+        // O scrollIntoView faz scroll para o elemento
+        if (
+          spaceAbove >= spaceNeededForCenter &&
+          spaceBelow >= spaceNeededForCenter
+        ) {
+          const desiredScrollTop =
+            elementTopInScrollContent - spaceNeededForCenter;
+          container.scrollTo({ top: desiredScrollTop, behavior: "smooth" });
+        } else {
+          element.scrollIntoView({ behavior: "smooth", block: "center" });
+        }
+      }, 100);
+    }
+  });
+};

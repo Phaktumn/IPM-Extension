@@ -1,77 +1,296 @@
-<!DOCTYPE html>
-<html>
-<head>
-	<meta charset="utf-8">
-	<style>
-		body {
-			max-width: 800px;
-			margin: 0 auto;
-		}
-		[lang] {
-			display: none;
-		}
-		:target {
-			background-color: pink;
-			border-radius: 0.25rem;
-		}
-		details {
-			background-color: lightcyan;
-		}
-		button:not([disabled]),
-		summary {
-			cursor: pointer;
-		}
-		[data-if-file-scheme-access-allowed] {
-			display: none;
-		}
-		body[data-file-scheme-access-allowed="true"] [data-if-file-scheme-access-allowed="true"],
-		body[data-file-scheme-access-allowed="false"] [data-if-file-scheme-access-allowed="false"] {
-			display: initial;
-		}
-	</style>
-</head>
-<body>
-	<h1>
-		<span lang="en">Settings</span>
-	</h1>
-	<div id="need-file-scheme-access">
-
-		<h2>
-			Table Header Color
-		</h2>
-		<p>
-			<input type="color" id="headerclr" value="#ff0000">
-		</p>
-
-		<h2>
-			<span lang="en">Enabling the feature</span>
-		</h2>
-		<p data-if-file-scheme-access-allowed="true">
-			<span lang="en">✔️ Setting changes have been completed.</span>
-		</p>
-		<p data-if-file-scheme-access-allowed="false">
-			<span lang="en">⚠️ Setting change may be required. Not required depending on the organization's group policy settings.</span>
-		</p>
-		<ol>
-			<li>
-				<span lang="en">Open <a data-id="extension-page-link">extensions page</a></span>
-			</li>
-			<li>
-				<span lang="en">Enable "Allow access to file URLs"</span>
-			</li>
-		</ol>
-		<h2>
-			<span lang="en">Confirm the operation</span>
-		</h2>
-		<button id="test">
-			<span lang="en">Open <code>file:///C:/</code></span>
-		</button>
-		<p>
-			Result: <span id="test-result">
-				<span lang="en">Unconfirmed</span>
-			</span>
-		</p>
+<dl style="margin-top: 55px;">
+	<input id="parentId" name="parentId" type="hidden" value="">
+	<dt>
+		<label for="priorityId">Urgência:</label>
+	</dt>
+	<dd>
+		<div class="select2-container select2" id="s2id_priorityId" style="width: 1358px;"><a href="javascript:void(0)"
+				class="select2-choice" tabindex="-1"> <span class="select2-chosen" id="select2-chosen-8">Normal
+					Impact</span><abbr class="select2-search-choice-close"></abbr> <span class="select2-arrow"
+					role="presentation"><b role="presentation"></b></span></a><label for="s2id_autogen8"
+				class="select2-offscreen">Urgência:</label><input class="select2-focusser select2-offscreen" type="text"
+				aria-haspopup="true" role="button" aria-labelledby="select2-chosen-8" id="s2id_autogen8"></div>
+		<select id="priorityId" name="priorityId" class="select2 select2-offscreen" size="1" tabindex="-1"
+			title="Urgência:">
+			<option value="1">Critical Impact / System Down</option>
+			<option value="2">Significant Impact</option>
+			<option value="3">Normal Impact</option>
+			<option value="4">Low/Informational</option>
+			<option value="5">N.a.</option>
+		</select>
+	</dd>
+	<div style="display:flex;flex-direction:row">
+		<dt>
+			<label for="scheduledDateStart">Data prevista início:</label>
+		</dt>
+		<dd>
+			<input id="scheduledDateStart" name="scheduledDateStart" class="align-center hasDatepicker" type="text"
+				value="" size="9">
+		</dd>
+		<dt class="marginZero" style="width:80px;margin-top:5px">
+			<label for="dateStart">Data início:</label>
+		</dt>
+		<dd>
+			<input id="dateStart" name="dateStart" class="align-center hasDatepicker" type="text" value="" size="9">
+		</dd>
+		<dt class="marginZero">
+			<label for="scheduledDateEnd">Data prevista fim:</label>
+		</dt>
+		<dd>
+			<input id="scheduledDateEnd" name="scheduledDateEnd" class="align-center hasDatepicker" type="text" value=""
+				size="9">
+		</dd>
+		<dt class="marginZero" style="width: 65px;margin-top:5px">
+			<label for="dateEnd">Data fim:</label>
+		</dt>
+		<dd>
+			<input id="dateEnd" name="dateEnd" class="align-center hasDatepicker" type="text" value="" size="9">
+		</dd>
 	</div>
-	<script src="./index.js"></script>
-</body>
-</html>
+	<dt>
+		<label for="title">Título:</label>
+	</dt>
+	<dd>
+		<input id="title" name="title" style="width: 92%;" type="text" value="">
+	</dd>
+	<dt>
+		<label for="detail">Detalhes:</label>
+	</dt>
+	<dd style="margin: 0 0 0 115px; width: 1470px; font-weight: normal;">
+		<div id="mceu_29" class="mce-tinymce mce-container mce-panel" hidefocus="1" tabindex="-1" role="application"
+			style="visibility: hidden; border-width: 1px;">
+			<div id="mceu_29-body" class="mce-container-body mce-stack-layout">
+				<div id="mceu_30" class="mce-toolbar-grp mce-container mce-panel mce-stack-layout-item mce-first"
+					hidefocus="1" tabindex="-1" role="group">
+					<div id="mceu_30-body" class="mce-container-body mce-stack-layout">
+						<div id="mceu_31" class="mce-container mce-toolbar mce-stack-layout-item mce-first mce-last"
+							role="toolbar">
+							<div id="mceu_31-body" class="mce-container-body mce-flow-layout">
+								<div id="mceu_32" class="mce-container mce-flow-layout-item mce-first mce-btn-group"
+									role="group">
+									<div id="mceu_32-body">
+										<div id="mceu_0" class="mce-widget mce-btn mce-btn-small mce-first mce-disabled"
+											tabindex="-1" aria-labelledby="mceu_0" role="button" aria-label="Undo"
+											aria-disabled="true"><button role="presentation" type="button"
+												tabindex="-1"><i class="mce-ico mce-i-undo"></i></button></div>
+										<div id="mceu_1" class="mce-widget mce-btn mce-btn-small mce-disabled"
+											tabindex="-1" aria-labelledby="mceu_1" role="button" aria-label="Redo"
+											aria-disabled="true"><button role="presentation" type="button"
+												tabindex="-1"><i class="mce-ico mce-i-redo"></i></button></div>
+										<div id="mceu_2" class="mce-widget mce-btn mce-btn-small" tabindex="-1"
+											aria-labelledby="mceu_2" role="button" aria-label="Copy"><button
+												role="presentation" type="button" tabindex="-1"><i
+													class="mce-ico mce-i-copy"></i></button></div>
+										<div id="mceu_3" class="mce-widget mce-btn mce-btn-small mce-last" tabindex="-1"
+											aria-labelledby="mceu_3" role="button" aria-label="Paste"><button
+												role="presentation" type="button" tabindex="-1"><i
+													class="mce-ico mce-i-paste"></i></button></div>
+									</div>
+								</div>
+								<div id="mceu_33" class="mce-container mce-flow-layout-item mce-btn-group" role="group">
+									<div id="mceu_33-body">
+										<div id="mceu_4" class="mce-widget mce-btn mce-btn-small mce-first"
+											tabindex="-1" aria-labelledby="mceu_4" role="button" aria-label="Bold">
+											<button role="presentation" type="button" tabindex="-1"><i
+													class="mce-ico mce-i-bold"></i></button></div>
+										<div id="mceu_5" class="mce-widget mce-btn mce-btn-small" tabindex="-1"
+											aria-labelledby="mceu_5" role="button" aria-label="Italic"><button
+												role="presentation" type="button" tabindex="-1"><i
+													class="mce-ico mce-i-italic"></i></button></div>
+										<div id="mceu_6" class="mce-widget mce-btn mce-btn-small" tabindex="-1"
+											aria-labelledby="mceu_6" role="button" aria-label="Underline"><button
+												role="presentation" type="button" tabindex="-1"><i
+													class="mce-ico mce-i-underline"></i></button></div>
+										<div id="mceu_7" class="mce-widget mce-btn mce-btn-small mce-last" tabindex="-1"
+											aria-labelledby="mceu_7" role="button" aria-label="Strikethrough"><button
+												role="presentation" type="button" tabindex="-1"><i
+													class="mce-ico mce-i-strikethrough"></i></button></div>
+									</div>
+								</div>
+								<div id="mceu_34" class="mce-container mce-flow-layout-item mce-btn-group" role="group">
+									<div id="mceu_34-body">
+										<div id="mceu_8"
+											class="mce-widget mce-btn mce-btn-small mce-colorbutton mce-first"
+											role="button" tabindex="-1" aria-haspopup="true" aria-label="Text color">
+											<button role="presentation" hidefocus="1" type="button" tabindex="-1"><i
+													class="mce-ico mce-i-forecolor"></i><span id="mceu_8-preview"
+													class="mce-preview"></span></button><button type="button"
+												class="mce-open" hidefocus="1" tabindex="-1"> <i
+													class="mce-caret"></i></button></div>
+										<div id="mceu_9"
+											class="mce-widget mce-btn mce-btn-small mce-colorbutton mce-last"
+											role="button" tabindex="-1" aria-haspopup="true"
+											aria-label="Background color"><button role="presentation" hidefocus="1"
+												type="button" tabindex="-1"><i class="mce-ico mce-i-backcolor"></i><span
+													id="mceu_9-preview" class="mce-preview"></span></button><button
+												type="button" class="mce-open" hidefocus="1" tabindex="-1"> <i
+													class="mce-caret"></i></button></div>
+									</div>
+								</div>
+								<div id="mceu_35" class="mce-container mce-flow-layout-item mce-btn-group" role="group">
+									<div id="mceu_35-body">
+										<div id="mceu_10" class="mce-widget mce-btn mce-btn-small mce-first"
+											tabindex="-1" aria-labelledby="mceu_10" role="button"
+											aria-label="Clear formatting"><button role="presentation" type="button"
+												tabindex="-1"><i class="mce-ico mce-i-removeformat"></i></button></div>
+										<div id="mceu_11" class="mce-widget mce-btn mce-btn-small mce-last"
+											tabindex="-1" aria-labelledby="mceu_11" role="button"
+											aria-label="Horizontal line"><button role="presentation" type="button"
+												tabindex="-1"><i class="mce-ico mce-i-hr"></i></button></div>
+									</div>
+								</div>
+								<div id="mceu_36" class="mce-container mce-flow-layout-item mce-btn-group" role="group">
+									<div id="mceu_36-body">
+										<div id="mceu_12"
+											class="mce-widget mce-btn mce-splitbtn mce-btn-small mce-menubtn mce-first"
+											role="button" tabindex="-1" aria-label="Bullet list" aria-haspopup="true">
+											<button type="button" hidefocus="1" tabindex="-1"><i
+													class="mce-ico mce-i-bullist"></i></button><button type="button"
+												class="mce-open" hidefocus="1" tabindex="-1"> <i
+													class="mce-caret"></i></button></div>
+										<div id="mceu_13"
+											class="mce-widget mce-btn mce-splitbtn mce-btn-small mce-menubtn"
+											role="button" tabindex="-1" aria-label="Numbered list" aria-haspopup="true">
+											<button type="button" hidefocus="1" tabindex="-1"><i
+													class="mce-ico mce-i-numlist"></i></button><button type="button"
+												class="mce-open" hidefocus="1" tabindex="-1"> <i
+													class="mce-caret"></i></button></div>
+										<div id="mceu_14" class="mce-widget mce-btn mce-btn-small" tabindex="-1"
+											aria-labelledby="mceu_14" role="button" aria-label="Decrease indent"><button
+												role="presentation" type="button" tabindex="-1"><i
+													class="mce-ico mce-i-outdent"></i></button></div>
+										<div id="mceu_15" class="mce-widget mce-btn mce-btn-small mce-last"
+											tabindex="-1" aria-labelledby="mceu_15" role="button"
+											aria-label="Increase indent"><button role="presentation" type="button"
+												tabindex="-1"><i class="mce-ico mce-i-indent"></i></button></div>
+									</div>
+								</div>
+								<div id="mceu_37" class="mce-container mce-flow-layout-item mce-btn-group" role="group">
+									<div id="mceu_37-body">
+										<div id="mceu_16"
+											class="mce-widget mce-btn mce-btn-small mce-menubtn mce-first mce-btn-has-text"
+											tabindex="-1" aria-labelledby="mceu_16" role="button" aria-haspopup="true">
+											<button id="mceu_16-open" role="presentation" type="button"
+												tabindex="-1"><span class="mce-txt">Formats</span> <i
+													class="mce-caret"></i></button></div>
+										<div id="mceu_17"
+											class="mce-widget mce-btn mce-btn-small mce-menubtn mce-fixed-width mce-listbox mce-btn-has-text"
+											tabindex="-1" aria-labelledby="mceu_17" role="button"
+											aria-label="Font Family" aria-haspopup="true"><button id="mceu_17-open"
+												role="presentation" type="button" tabindex="-1"><span
+													class="mce-txt">Font Family</span> <i
+													class="mce-caret"></i></button></div>
+										<div id="mceu_18"
+											class="mce-widget mce-btn mce-btn-small mce-menubtn mce-fixed-width mce-listbox mce-last mce-btn-has-text"
+											tabindex="-1" aria-labelledby="mceu_18" role="button"
+											aria-label="Font Sizes" aria-haspopup="true"><button id="mceu_18-open"
+												role="presentation" type="button" tabindex="-1"><span
+													class="mce-txt">Font Sizes</span> <i class="mce-caret"></i></button>
+										</div>
+									</div>
+								</div>
+								<div id="mceu_38" class="mce-container mce-flow-layout-item mce-btn-group" role="group">
+									<div id="mceu_38-body">
+										<div id="mceu_19" class="mce-widget mce-btn mce-btn-small mce-first"
+											tabindex="-1" aria-labelledby="mceu_19" role="button"
+											aria-label="Insert/edit link"><button role="presentation" type="button"
+												tabindex="-1"><i class="mce-ico mce-i-link"></i></button></div>
+										<div id="mceu_20" class="mce-widget mce-btn mce-btn-small mce-last"
+											tabindex="-1" aria-labelledby="mceu_20" role="button"
+											aria-label="Remove link"><button role="presentation" type="button"
+												tabindex="-1"><i class="mce-ico mce-i-unlink"></i></button></div>
+									</div>
+								</div>
+								<div id="mceu_39" class="mce-container mce-flow-layout-item mce-btn-group" role="group">
+									<div id="mceu_39-body">
+										<div id="mceu_21" class="mce-widget mce-btn mce-btn-small mce-first mce-last"
+											tabindex="-1" aria-labelledby="mceu_21" role="button"
+											aria-label="Find and replace"><button role="presentation" type="button"
+												tabindex="-1"><i class="mce-ico mce-i-searchreplace"></i></button></div>
+									</div>
+								</div>
+								<div id="mceu_40" class="mce-container mce-flow-layout-item mce-btn-group" role="group">
+									<div id="mceu_40-body">
+										<div id="mceu_22" class="mce-widget mce-btn mce-btn-small mce-first mce-last"
+											tabindex="-1" aria-labelledby="mceu_22" role="button"
+											aria-label="Image Embed Upload"><button role="presentation" type="button"
+												tabindex="-1"><i class="mce-ico mce-i-image"></i></button></div>
+									</div>
+								</div>
+								<div id="mceu_41" class="mce-container mce-flow-layout-item mce-btn-group" role="group">
+									<div id="mceu_41-body">
+										<div id="mceu_23"
+											class="mce-widget mce-btn mce-splitbtn mce-btn-small mce-menubtn mce-first"
+											role="button" tabindex="-1" aria-label="Insert date/time"
+											aria-haspopup="true"><button type="button" hidefocus="1" tabindex="-1"><i
+													class="mce-ico mce-i-insertdatetime"></i></button><button
+												type="button" class="mce-open" hidefocus="1" tabindex="-1"> <i
+													class="mce-caret"></i></button></div>
+										<div id="mceu_24" class="mce-widget mce-btn mce-btn-small" tabindex="-1"
+											aria-labelledby="mceu_24" role="button" aria-label="Special character">
+											<button role="presentation" type="button" tabindex="-1"><i
+													class="mce-ico mce-i-charmap"></i></button></div>
+										<div id="mceu_25" class="mce-widget mce-btn mce-btn-small" tabindex="-1"
+											aria-labelledby="mceu_25" role="button" aria-label="Fullscreen"><button
+												role="presentation" type="button" tabindex="-1"><i
+													class="mce-ico mce-i-fullscreen"></i></button></div>
+										<div id="mceu_26" class="mce-widget mce-btn mce-btn-small mce-last mce-disabled"
+											tabindex="-1" aria-labelledby="mceu_26" role="button"
+											aria-label="Restore last draft" aria-disabled="true"><button
+												role="presentation" type="button" tabindex="-1"><i
+													class="mce-ico mce-i-restoredraft"></i></button></div>
+									</div>
+								</div>
+								<div id="mceu_42" class="mce-container mce-flow-layout-item mce-last mce-btn-group"
+									role="group">
+									<div id="mceu_42-body">
+										<div id="mceu_27" class="mce-widget mce-btn mce-btn-small mce-first"
+											tabindex="-1" aria-labelledby="mceu_27" role="button"
+											aria-label="Insert/Edit code sample"><button role="presentation"
+												type="button" tabindex="-1"><i
+													class="mce-ico mce-i-codesample"></i></button></div>
+										<div id="mceu_28" class="mce-widget mce-btn mce-btn-small mce-menubtn mce-last"
+											tabindex="-1" aria-labelledby="mceu_28" role="button" aria-label="Table"
+											aria-haspopup="true"><button id="mceu_28-open" role="presentation"
+												type="button" tabindex="-1"><i class="mce-ico mce-i-table"></i> <i
+													class="mce-caret"></i></button></div>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+				<div id="mceu_43" class="mce-edit-area mce-container mce-panel mce-stack-layout-item" hidefocus="1"
+					tabindex="-1" role="group" style="border-width: 1px 0px 0px;"><iframe id="detail_ifr"
+						frameborder="0" allowtransparency="true"
+						title="Rich Text Area. Press ALT-F9 for menu. Press ALT-F10 for toolbar. Press ALT-0 for help"
+						src="javascript:&quot;&quot;" style="width: 100%; height: 155px; display: block;"></iframe>
+				</div>
+				<div id="mceu_44" class="mce-statusbar mce-container mce-panel mce-stack-layout-item mce-last"
+					hidefocus="1" tabindex="-1" role="group" style="border-width: 1px 0px 0px;">
+					<div id="mceu_44-body" class="mce-container-body mce-flow-layout">
+						<div id="mceu_45" class="mce-path mce-flow-layout-item mce-first">
+							<div class="mce-path-item">&nbsp;</div>
+						</div>
+						<span id="mceu_47" class="mce-wordcount mce-widget mce-label mce-flow-layout-item">Words:
+							0</span>
+						<div id="mceu_46" class="mce-flow-layout-item mce-resizehandle mce-last"><i
+								class="mce-ico mce-i-resize"></i></div>
+					</div>
+				</div>
+			</div>
+		</div>
+		<textarea id="detail" name="detail" rows="10" cols="100" style="display: none;" aria-hidden="true"></textarea>
+	</dd>
+	<dt>
+		<label for="attachments">Anexos :</label>
+	</dt>
+	<dd style="margin-bottom: 0; padding-bottom: 0;">
+		<input id="attachments0.typeId" name="attachments[0].typeId" value="1" type="hidden">
+		<input id="attachments0.attachments.attachments" name="attachments[0].attachments.attachments" type="file"
+			multiple="multiple" value="" size="218">
+	</dd>
+	<dd style="margin-top: 0; padding-top: 0;margin-left:115px">
+		<span class="field_tip">Pode selecionar vários anexos</span>
+	</dd>
+</dl>
