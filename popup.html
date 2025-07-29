@@ -5,171 +5,185 @@
  value "popup.html".
  -->
 <html lang="en">
-  <head>
-    <title>Extension's Popup</title>
-    <style>
-      :root {
-        --primary: #3b4758;
-        --accent: #5e46c9;
-        --bg: #f7f7f7;
-        --border: #e0e0e0;
-        --radius: 10px;
-        --shadow: 0 2px 8px rgba(60, 60, 60, 0.08);
-      }
-      body {
-        font-family: "Segoe UI", "Lucida Grande", Tahoma, sans-serif;
-        background: var(--bg);
-        margin: 0;
-        padding: 0;
-        width: 600px !important;
-        min-height: 420px;
-        color: var(--primary);
-      }
-      .container {
-        display: flex;
-        gap: 24px;
-        padding: 24px;
-      }
-      .column {
-        flex: 1;
-        background: #fff;
-        border-radius: var(--radius);
-        box-shadow: var(--shadow);
-        padding: 20px 18px;
-        min-width: 220px;
-      }
-      h2 {
-        margin-top: 0;
-        font-size: 1.2rem;
-        color: var(--primary);
-        border-bottom: 1px solid var(--border);
-        padding-bottom: 6px;
-        margin-bottom: 18px;
-        letter-spacing: 0.5px;
-      }
-      .margin-top {
-        margin-top: 1rem;
-        display: flex;
-        align-items: center;
-        gap: 12px;
-      }
-      input[type="color"] {
-        border: none;
-        width: 32px;
-        height: 32px;
-        border-radius: 6px;
-        box-shadow: 0 1px 4px rgba(60, 60, 60, 0.10);
-        cursor: pointer;
-        transition: box-shadow 0.2s;
-      }
-      input[type="color"]:focus {
-        box-shadow: 0 0 0 2px var(--accent);
-        outline: none;
-      }
-      label {
-        font-size: 1rem;
-        color: var(--primary);
-        cursor: pointer;
-      }
-      .row {
-        display: flex;
-        flex-direction: column;
-        gap: 4px;
-        margin: 24px 24px 0 24px;
-      }
-      .checkbox-group {
-        display: flex;
-        align-items: center;
-        gap: 8px;
-        margin-bottom: 8px;
-      }
-      .reload {
-        cursor: pointer;
-        text-decoration: underline;
-        color: var(--accent);
-        font-size: 0.95rem;
-        margin-left: 8px;
-      }
-      small {
-        color: #888;
-        font-size: 0.92rem;
-        margin-top: 2px;
-        margin-bottom: 8px;
-        display: block;
-      }
-    </style>
-    <!--
+
+<head>
+  <title>Extension's Popup</title>
+  <style>
+    :root {
+      --primary: #3b4758;
+      --accent: #5e46c9;
+      --bg: #f7f7f7;
+      --border: #e0e0e0;
+      --radius: 10px;
+      --shadow: 0 2px 8px rgba(60, 60, 60, 0.08);
+    }
+
+    body {
+      font-family: "Segoe UI", "Lucida Grande", Tahoma, sans-serif;
+      background: var(--bg);
+      margin: 0;
+      padding: 0;
+      width: 600px !important;
+      min-height: 420px;
+      color: var(--primary);
+    }
+
+    .container {
+      display: flex;
+      gap: 24px;
+      padding: 24px;
+    }
+
+    .column {
+      flex: 1;
+      background: #fff;
+      border-radius: var(--radius);
+      box-shadow: var(--shadow);
+      padding: 20px 18px;
+      min-width: 220px;
+    }
+
+    h2 {
+      margin-top: 0;
+      font-size: 1.2rem;
+      color: var(--primary);
+      border-bottom: 1px solid var(--border);
+      padding-bottom: 6px;
+      margin-bottom: 18px;
+      letter-spacing: 0.5px;
+    }
+
+    .margin-top {
+      margin-top: 1rem;
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    input[type="color"] {
+      border: none;
+      width: 32px;
+      height: 32px;
+      border-radius: 6px;
+      box-shadow: 0 1px 4px rgba(60, 60, 60, 0.10);
+      cursor: pointer;
+      transition: box-shadow 0.2s;
+    }
+
+    input[type="color"]:focus {
+      box-shadow: 0 0 0 2px var(--accent);
+      outline: none;
+    }
+
+    label {
+      font-size: 1rem;
+      color: var(--primary);
+      cursor: pointer;
+    }
+
+    .row {
+      display: flex;
+      flex-direction: column;
+      gap: 4px;
+      margin: 24px 24px 0 24px;
+    }
+
+    .checkbox-group {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      margin-bottom: 8px;
+    }
+
+    .reload {
+      cursor: pointer;
+      text-decoration: underline;
+      color: var(--accent);
+      font-size: 0.95rem;
+      margin-left: 8px;
+    }
+
+    small {
+      color: #888;
+      font-size: 0.92rem;
+      margin-top: 2px;
+      margin-bottom: 8px;
+      display: block;
+    }
+  </style>
+  <!--
       - JavaScript and HTML must be in separate files: see our Content Security
       - Policy documentation[1] for details and explanation.
       -
       - [1]: https://developer.chrome.com/extensions/contentSecurityPolicy
      -->
-    <script src="popup.js"></script>
-  </head>
+  <script src="popup.js"></script>
+</head>
 
-  <body>
-    <div class="row">
-      <div class="checkbox-group">
-        <input id="openClientConfigsFile" name="clientConfigTarget" type="checkbox">
-        <label for="clientConfigTarget">Open Client Configuration File directly instead of folder.</label>
-      </div>
-      <small>
-        This value only takes effect after reloading the page.
-        <a id="reload" class="reload">Reload?</a>
-      </small>
+<body>
+  <div class="row">
+    <div class="checkbox-group">
+      <input id="openClientConfigsFile" name="clientConfigTarget" type="checkbox">
+      <label for="clientConfigTarget">Open Client Configuration File directly instead of folder.</label>
     </div>
-    <div class="container">
-      <div class="column">
-        <h2>Tabs</h2>
-        <div class="margin-top">
-          <input id="tabBtmClr" type="color" />
-          <label for="tabBtmClr">Bottom Color Active</label>
-        </div>
-        <div class="margin-top">
-          <input id="tabInactiveBtmClr" type="color" />
-          <label for="tabInactiveBtmClr">Bottom Color Inactive</label>
-        </div>
-        <h2 class="margin-top">Avatar</h2>
-        <div class="margin-top">
-          <input id="avatarBg" type="color" />
-          <label for="avatarBg">Avatar Background Color</label>
-        </div>
-        <div class="margin-top">
-          <input id="avatarColor" type="color" />
-          <label for="avatarColor">Avatar Text Color</label>
-        </div>
+    <small>
+      This value only takes effect after reloading the page.
+      <a id="reload" class="reload">Reload?</a>
+    </small>
+  </div>
+  <div class="container">
+    <div class="column">
+      <h2>Tabs</h2>
+      <div class="margin-top">
+        <input id="tabBtmClr" type="color" />
+        <label for="tabBtmClr">Bottom Color Active</label>
       </div>
-      <div class="column">
-        <h2>Date Picker</h2>
-        <div class="margin-top">
-          <input id="dpbgtoday" type="color" />
-          <label for="dpbgtoday">Today Background</label>
-        </div>
-        <div class="margin-top">
-          <input id="dpborderhover" type="color" />
-          <label for="dpborderhover">Hover Border</label>
-        </div>
-        <div class="margin-top">
-          <input id="dpbgthover" type="color" />
-          <label for="dpbgthover">Hover Background</label>
-        </div>
-        <div class="margin-top">
-          <input id="dpselectedborder" type="color" />
-          <label for="dpselectedborder">Selected Border</label>
-        </div>
-        <div class="margin-top">
-          <input id="dpselectedbg" type="color" />
-          <label for="dpselectedbg">Selected Background</label>
-        </div>
-        <div class="margin-top">
-          <input id="dptexthover" type="color" />
-          <label for="dptexthover">Text Hover</label>
-        </div>
-        <div class="margin-top">
-          <input id="dptextdefault" type="color" />
-          <label for="dptextdefault">Text Default</label>
-        </div>
+      <div class="margin-top">
+        <input id="tabInactiveBtmClr" type="color" />
+        <label for="tabInactiveBtmClr">Bottom Color Inactive</label>
+      </div>
+      <h2 class="margin-top">Avatar</h2>
+      <div class="margin-top">
+        <input id="avatarBg" type="color" />
+        <label for="avatarBg">Avatar Background Color</label>
+      </div>
+      <div class="margin-top">
+        <input id="avatarColor" type="color" />
+        <label for="avatarColor">Avatar Text Color</label>
       </div>
     </div>
-  </body>
+    <div class="column">
+      <h2>Date Picker</h2>
+      <div class="margin-top">
+        <input id="dpbgtoday" type="color" />
+        <label for="dpbgtoday">Today Background</label>
+      </div>
+      <div class="margin-top">
+        <input id="dpborderhover" type="color" />
+        <label for="dpborderhover">Hover Border</label>
+      </div>
+      <div class="margin-top">
+        <input id="dpbgthover" type="color" />
+        <label for="dpbgthover">Hover Background</label>
+      </div>
+      <div class="margin-top">
+        <input id="dpselectedborder" type="color" />
+        <label for="dpselectedborder">Selected Border</label>
+      </div>
+      <div class="margin-top">
+        <input id="dpselectedbg" type="color" />
+        <label for="dpselectedbg">Selected Background</label>
+      </div>
+      <div class="margin-top">
+        <input id="dptexthover" type="color" />
+        <label for="dptexthover">Text Hover</label>
+      </div>
+      <div class="margin-top">
+        <input id="dptextdefault" type="color" />
+        <label for="dptextdefault">Text Default</label>
+      </div>
+    </div>
+  </div>
+</body>
+
 </html>

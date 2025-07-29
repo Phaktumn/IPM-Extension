@@ -68,10 +68,24 @@ chrome.storage.local.get("options").then((r) => {
     elements.datepicker.selectedbordercolor.setAttribute(
       "value",
       options.datepicker.selectedbordercolor
+        ? options.datepicker.selectedbordercolor
+        : "#737373"
     );
     elements.datepicker.selectedbgcolor.setAttribute(
       "value",
       options.datepicker.selectedbgcolor
+        ? options.datepicker.selectedbgcolor
+        : "#f7f7f7"
+    );
+
+    elements.profile.avatarBg.setAttribute("value", options.profile.avatarBg);
+    elements.profile.avatarColor.setAttribute(
+      "value",
+      options.profile.avatarColor ? options.profile.avatarColor : "#751866"
+    );
+    elements.profile.avatarBorder.setAttribute(
+      "value",
+      options.profile.avatarBorder ? options.profile.avatarBorder : "#000000"
     );
 
     // With these:

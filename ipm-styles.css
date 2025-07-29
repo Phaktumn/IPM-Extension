@@ -245,18 +245,15 @@
   --Button-color:#2A3646;
 
 }
-
 .icon,
 [class*="material-icons"],
 [class*="material-symbols"] {
   font-family: "Material Icons" !important;
 
 }
-
 .material-symbols-outlined {
   font-family: 'Material Symbols Outlined' !important;
 }
-
 body {
   font-family: var(--global-font-family) !important;
   line-height: 1.5;
