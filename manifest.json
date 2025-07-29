@@ -1,5 +1,4 @@
 {
-<<<<<<< HEAD
   "manifest_version": 3,
   "name": "Better File Explorer for Chrome",
   "version": "1.0.0",
@@ -25,28 +24,9 @@
   },
   "content_scripts": [
     {
-=======
-    "manifest_version": 3,
-    
-    "name": "Enhanced File Explorer for Chrome", 
-    
-    "version": "3.0.0",
-    
-    "description": "Enhanced File Explorer for Chrome",
-    
-    "icons": {
-      "16": "images/file-explorer-icon.png",
-      "32": "images/file-explorer-icon.png",
-      "48": "images/file-explorer-icon.png",
-      "128": "images/file-explorer-icon.png"
-    },
-    
-    "content_scripts": [{
->>>>>>> a33978c00bb394f1f8b6008b5ed25177b64af22b
       "css": ["styles.css"],
       "js": ["utils.js", "content.js"],
       "matches": ["file://*"]
-<<<<<<< HEAD
     },
     {
       "js": ["utils.js", "content.js"],
@@ -83,11 +63,4 @@
     }
   ],
   "host_permissions": ["file://*", "http://ipm.macwin.pt/*"]
-=======
-    }],
-    
-    "author": "federicobrancasi@gmail.com", 
-    
-    "permissions": [ "<all_urls>" ]
->>>>>>> a33978c00bb394f1f8b6008b5ed25177b64af22b
 }
