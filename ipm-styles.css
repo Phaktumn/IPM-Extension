@@ -243,6 +243,7 @@
   --profile-avatar-bg: #fff187;
   --profile-avatar-color: #fff;
   --Button-color:#2A3646;
+  --select-border-color: #dddddd;
 
 }
 .icon,
@@ -404,12 +405,18 @@ fieldset {
 select {
   -webkit-appearance: none;
   -moz-appearance: none;
+  color: var(--text);
   appearance: none;
   background: transparent;
-  background-image: url("data:image/svg+xml;utf8,<svg fill='black' height='24' viewBox='0 0 24 24' width='24' xmlns='http://www.w3.org/2000/svg'><path d='M7 10l5 5 5-5z'/><path d='M00h24v24H0z' fill='none'/></svg>");
+  background-image: url('data:image/svg+xml;charset=US-ASCII,<svg xmlns="http://www.w3.org/2000/svg" fill="gray" viewBox="0 0 16 16"><path d="M7.247 11.14l-4.796-5.481A.5.5 0 0 1 2.451 5h11.098a.5.5 0 0 1 .379.82l-4.796 5.48a.5.5 0 0 1-.76 0z"/></svg>') !important;
   background-repeat: no-repeat;
   background-position-x: 100%;
   background-position-y: 50%;
+  background-size: 10px !important;
+  text-overflow: ellipsis;
+  text-wrap: inherit;
+  padding: 0.33em;
+  padding-right: 0.5em !important;
 }
 button,
 input,
@@ -421,8 +428,8 @@ a[role="button"] {
   line-height: 1.5;
   margin: 0;
   padding: 0.33em;
-  border: 1px solid var(--text-light);
-  border-radius: var(--border-radius);
+  border: 1px solid var(--select-border-color) !important;
+  border-radius: var(--border-radius) !important;
   box-sizing: border-box;
 }
 input[type="checkbox"],
@@ -660,9 +667,7 @@ section#header-user-info {
   margin-top: 0 !important;
   height: 1rem !important;
 }
-div#select2-drop {
-  border: 1px solid #dddddd;
-}
+
 .infoBox {
   border: 1px solid #e6e6e6 !important;
 }
@@ -1395,6 +1400,27 @@ select.input_new_update_progress:focus {
   border-color: #80bdff;
   box-shadow: 0 0 0 2px rgba(0,123,255,.25);
 }
+
+div#select2-drop {
+  border: 1px solid #dddddd;
+}
+
+.select2-drop {
+  border: none !important;
+  box-shadow: none !important;
+  background-color: transparent !important;
+}
+
+.select2-results {
+  margin: 0 !important;
+  padding: 0 !important;
+  border: none !important;
+}
+
+.select2-search {
+  padding: 0 !important;
+}
+
 .select2-container,
 .select2-drop,
 .select2-search,
@@ -1404,9 +1430,16 @@ select.input_new_update_progress:focus {
 }
 .select2-container .select2-choice {
   border-radius: var(--border-radius) !important;
-  border-color: #dddddd !important;
+  border-color: var(--select-border-color) !important;
   background-color: white !important;
   background-image: none !important;
+  height: 29.89px !important;
+  max-height: 29.89px !important;
+  display: flex !important;
+  flex-wrap: wrap !important;
+  align-items: center !important;
+  align-content: center !important;
+  text-align: center !important;
 }
 .select2-container .select2-choice .select2-arrow {
   border: none !important;
@@ -1450,7 +1483,7 @@ select option {
   margin-top: 2px;
   padding: 0;
   list-style: none;
-  border: 1px solid #CED4DA;
+  border: 1px solid var(--select-border-color);
   border-radius: var(--border-radius) !important;
   background-color: #fff;
   box-shadow: 0 4px 6px rgba(0,0,0,0.1);
@@ -1904,7 +1937,7 @@ div.select2-container.input_new_update_progress.select_task > a.select2-choice {
   justify-content: space-between !important;
   align-items: center !important;
   padding: 6px 10px !important;
-  border: 1px solid #CED4DA !important;
+  border: 1px solid var(--select-border-color) !important;
   border-radius: var(--border-radius) !important;
   background-color: #fff !important;
   cursor: pointer !important;

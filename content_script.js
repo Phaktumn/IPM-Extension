@@ -583,16 +583,28 @@ function processProgressPage() {
   if (requiredTable) {
     const links = requiredTable.querySelectorAll("td a");
     const tds = requiredTable.querySelectorAll("tr.line-up > td:nth-child(1)");
+    const tds3 = requiredTable.querySelectorAll(
+      "tr.line-up > td.elipse-wrap.padding-left-rigth-3.detail-col"
+    );
     tds.forEach((td) => {
       td.style.display = "flex";
       td.style.height = "auto";
       const spanHier = td.querySelector("span.hier");
       spanHier.style.alignSelf = "center";
     });
+    tds3.forEach((td) => {
+      const contentSpan = td.querySelector("span.title-text > span");
+      if (contentSpan) {
+        contentSpan.style.whiteSpace = "normal";
+        contentSpan.style.textOverflow = "normal";
+        contentSpan.style.overflow = "visible";
+      }
+    });
     links.forEach((link) => {
       link.style.whiteSpace = "normal";
       link.style.textOverflow = "normal";
       link.style.overflow = "visible";
+      link.style.maxWidth = "185px";
     });
   }
 
