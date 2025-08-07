@@ -427,6 +427,7 @@ a[role="button"] {
 }
 input[type="checkbox"],
 input[type="radio"] {
+  margin-right: 0.25rem;
   border: none;
   border: 0;
 }

@@ -12,6 +12,7 @@ const pages = [
   { url: "task/hierarchy.html", handler: processTaskHierarchy },
   { url: "project.html", handler: processProjectPage },
   { url: "insert.html", handler: processInsertPage },
+  { url: "progress.html", handler: processProgressPage },
 ];
 
 pages.forEach(({ url, handler }) => {
@@ -573,6 +574,35 @@ function processInsertPage() {
     dtElem = document.createElement("dt");
     dt.insertBefore(dtElem, lastElemDt);
   }, 100);
+}
+
+function processProgressPage() {
+  const requiredTable = document.querySelectorAll(
+    "#progress-update > table.tbl_tasks"
+  )[0];
+  if (requiredTable) {
+    const links = requiredTable.querySelectorAll("td a");
+    const tds = requiredTable.querySelectorAll("tr.line-up > td:nth-child(1)");
+    tds.forEach((td) => {
+      td.style.display = "flex";
+      td.style.height = "auto";
+      const spanHier = td.querySelector("span.hier");
+      spanHier.style.alignSelf = "center";
+    });
+    links.forEach((link) => {
+      link.style.whiteSpace = "normal";
+      link.style.textOverflow = "normal";
+      link.style.overflow = "visible";
+    });
+  }
+
+  const showMoreDetailsCheck = document.querySelector(
+    "#main > div:nth-child(10)"
+  );
+  if (showMoreDetailsCheck) {
+    showMoreDetailsCheck.style.display = "flex";
+    showMoreDetailsCheck.style.alignItems = "center";
+  }
 }
 
 if (!window.alreadyExecuted) {
