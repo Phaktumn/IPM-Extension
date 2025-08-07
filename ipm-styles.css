@@ -407,7 +407,7 @@ select {
   -moz-appearance: none;
   color: var(--text);
   appearance: none;
-  background: transparent;
+  background: white;
   background-image: url('data:image/svg+xml;charset=US-ASCII,<svg xmlns="http://www.w3.org/2000/svg" fill="gray" viewBox="0 0 16 16"><path d="M7.247 11.14l-4.796-5.481A.5.5 0 0 1 2.451 5h11.098a.5.5 0 0 1 .379.82l-4.796 5.48a.5.5 0 0 1-.76 0z"/></svg>') !important;
   background-repeat: no-repeat;
   background-position-x: 100%;
@@ -1429,6 +1429,7 @@ div#select2-drop {
   padding-top: 0 !important;
 }
 .select2-container .select2-choice {
+  box-sizing: border-box !important;
   border-radius: var(--border-radius) !important;
   border-color: var(--select-border-color) !important;
   background-color: white !important;
@@ -1976,13 +1977,22 @@ div.select2-container.input_new_update_progress.select_task > a.select2-choice >
 div.select2-container.select_client > a.select2-choice > span.select2-arrow > b,
 div.select2-container.select_project > a.select2-choice > span.select2-arrow > b,
 div.select2-container.input_new_update_progress.select_task > a.select2-choice > span.select2-arrow > b {
-  width: 12px !important;
+  width: 10px !important;
   height: 12px !important;
   background-image: url('data:image/svg+xml;charset=US-ASCII,<svg xmlns="http://www.w3.org/2000/svg" fill="gray" viewBox="0 0 16 16"><path d="M7.247 11.14l-4.796-5.481A.5.5 0 0 1 2.451 5h11.098a.5.5 0 0 1 .379.82l-4.796 5.48a.5.5 0 0 1-.76 0z"/></svg>') !important;
   background-repeat: no-repeat !important;
   background-position: center !important;
   background-size: contain !important;
 }
+
+div.select2-container > a.select2-choice > span.select2-arrow > b {
+  background-image: url('data:image/svg+xml;charset=US-ASCII,<svg xmlns="http://www.w3.org/2000/svg" fill="gray" viewBox="0 0 16 16"><path d="M7.247 11.14l-4.796-5.481A.5.5 0 0 1 2.451 5h11.098a.5.5 0 0 1 .379.82l-4.796 5.48a.5.5 0 0 1-.76 0z"/></svg>') !important;
+  background-repeat: no-repeat !important;
+  background-position: center !important;
+  background-size: contain !important;
+  width: 10px;
+}
+
 
 td.align-center .create-task-client {
   margin-right: 8px;
